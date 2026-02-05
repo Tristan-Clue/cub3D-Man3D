@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/05 16:00:47 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/05 16:09:46 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,10 @@
 
 typedef struct s_map
 {
-	t_vect	*vertices;
-	t_vect	*render_pt;
-	t_edge	*edges;
-	int		vertex_count;
-	int		edge_count;
+	char	**layout;
 	int		width;
 	int		depth;
 	int		height;
-	int		max_y;
-	int		min_y;
 }			t_map;
 
 typedef struct s_img
