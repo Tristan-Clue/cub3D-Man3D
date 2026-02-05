@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/05 16:53:10 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/05 16:56:09 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 	 */
 
 	/*  TODO: for execute
-	 * setup_mlx_loop(&data);
+	 * setup_mlx_loop(&data); // look below
 	 */
 
 	mlx_destroy_image(data.mlx, data.img.img_ptr);
