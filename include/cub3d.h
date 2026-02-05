@@ -16,8 +16,10 @@
 # include <stdint.h>
 
 # define TITLE			"MAN3D"
-# define FRAME_WIDTH	720
-# define FRAME_HEIGHT	720
+# define WINDOW_WIDTH	1920
+# define WINDOW_HEIGHT	1080
+# define TEXX_WIDTH		640
+# define TEXX_HEIGHT	480
 
 # define SUCCESS		0
 # define FAILURE		1
@@ -36,6 +38,34 @@
 # define KEY_DOWN		0b10
 # define KEY_LEFT		0b100
 # define KEY_RIGHT		0b1000
+
+typedef struct map
+{
+	double	x;
+	double	y;
+	int		x_step;
+	int		y_step;
+}			t_map;
+
+typedef struct ray
+{
+	double	dir_x;
+	double	dir_y;
+	double	sidedist_x;
+	double	sidedist_y;
+}			t_ray;
+
+typedef	struct player
+{
+	double	x;
+	double	y;
+	double	plane_x;
+	double	plane_y;
+	double	dir_x;
+	double	dir_y;
+	t_ray	ray;
+	t_map	map;
+}			t_player;
 
 typedef struct s_map
 {
