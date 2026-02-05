@@ -1,0 +1,6 @@
+test.c
+main.c
+*.o
+*.a
+*.out
+*.txt
