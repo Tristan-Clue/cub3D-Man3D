@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/11 17:13:18 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/10 13:37:43 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # define TITLE			"MAN3D"
 # define WINDOW_WIDTH	1920
 # define WINDOW_HEIGHT	1080
-# define TEXX_WIDTH		640
-# define TEXX_HEIGHT	480
+# define RESO_WIDTH		640
+# define RESO_HEIGHT	480
 
 # define SUCCESS		0
 # define FAILURE		1
@@ -39,41 +39,46 @@
 # define KEY_LEFT		0b100
 # define KEY_RIGHT		0b1000
 
-typedef struct s_map
+typedef struct vec
 {
 	double	x;
 	double	y;
-	int		x_step;
-	int		y_step;
-}			t_map;
+}			t_vec
+
+typedef	struct tx
+{
+	// NOTE: Struct containing texture image and requisites
+}			t_tx;
 
 typedef struct ray
 {
-	double	dir_x;
-	double	dir_y;
-	double	sidedist_x;
-	double	sidedist_y;
+	int		map_x;
+	int		map_y;
+	double	camera_x;
+	t_vec	dir;
+	t_vec	delta_dist;
+	t_vec	side_dist;
+	t_vec	step;
+	double	ray_dist;
+	double	perp_dist;
+	int		hit;
 }			t_ray;
 
 typedef	struct player
 {
-	double	x;
-	double	y;
-	double	plane_x;
-	double	plane_y;
-	double	dir_x;
-	double	dir_y;
-	t_ray	ray;
-	t_map	map;
+	t_vec	pos;		// Player pos in world map
+	t_vec	plane;		// Vector of the camera plane, perpendicular to
+	t_vec	dir;		// The vector of player facing direction
 }			t_player;
 
-typedef struct s_mapdata
+typedef struct s_map
 {
 	char	**layout;
 	int		width;
 	int		depth;
 	int		height;
-}			t_mapdata;
+	t_tx	textures[4];
+}			t_map;
 
 typedef struct s_img
 {
@@ -86,11 +91,11 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	t_mapdata	mapdata;
-	t_img		img;
-	void		*mlx;
-	void		*window;
-}				t_data;
+	t_map	map;
+	t_img	img;
+	void	*mlx;
+	void	*window;
+}			t_data;
 
 void	error_exit(char *str);
 void	perror_exit(char *str);
