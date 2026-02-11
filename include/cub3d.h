@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/05 16:09:46 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/11 17:13:18 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define KEY_LEFT		0b100
 # define KEY_RIGHT		0b1000
 
-typedef struct map
+typedef struct s_map
 {
 	double	x;
 	double	y;
@@ -67,13 +67,13 @@ typedef	struct player
 	t_map	map;
 }			t_player;
 
-typedef struct s_map
+typedef struct s_mapdata
 {
 	char	**layout;
 	int		width;
 	int		depth;
 	int		height;
-}			t_map;
+}			t_mapdata;
 
 typedef struct s_img
 {
@@ -86,11 +86,11 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	t_map	map;
-	t_img	img;
-	void	*mlx;
-	void	*window;
-}			t_data;
+	t_mapdata	mapdata;
+	t_img		img;
+	void		*mlx;
+	void		*window;
+}				t_data;
 
 void	error_exit(char *str);
 void	perror_exit(char *str);
