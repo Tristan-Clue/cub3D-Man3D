@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/10 13:37:43 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/11 23:29:48 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <stdint.h>
 
 # define TITLE			"MAN3D"
-# define WINDOW_WIDTH	1920
-# define WINDOW_HEIGHT	1080
+# define WINDOW_WIDTH	1280
+# define WINDOW_HEIGHT	720
 # define RESO_WIDTH		640
-# define RESO_HEIGHT	480
+# define RESO_HEIGHT	360
 
 # define SUCCESS		0
 # define FAILURE		1
