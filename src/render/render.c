@@ -6,11 +6,12 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:58:17 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/10 18:36:36 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:19:25 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 
 // NOTE: Renders the image the player looks at.
 // Background is rendered to the image address first to simplify process.
@@ -28,14 +29,14 @@ void	render_pov(t_img *screen, t_player *player, t_map *map)
 	col = 0;
 	render_background(screen, map);
 	ray = (t_ray){0};
+	ray->map_x = floor(player->dir.x);
+	ray->map_y = floor(player->dir.y);
 	while (col < RESO_WIDTH)
 	{
-
 		ray.cameraX = 2 * (col / RESO_WIDTH) - 1;
-		init_rays(&ray, player, );	// Initiate current column ray
-		calculate_deltas(&ray, player);
-		get_step_dir(&ray);
-		get_ray_distance(&ray);
+		init_rays(player, &ray);	// Initiate current column ray
+		cast_rays(&ray);
+
 		// What do with distance
 		// Get perpendicular distance
 		// Render wall texture based off distance

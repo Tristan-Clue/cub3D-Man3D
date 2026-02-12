@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/10 13:37:53 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:19:19 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,40 @@ void	init_rays(t_player *player, t_ray *ray)
 	if (ray->dir.y < 0)
 	{
 		ray->step.y = -1;
-		ray->side_dist.y = player->map_y - 1 - player->pos.y;
+		ray->side_dist.y = player->pos.y - ray->map_y;
 	}
 	else
 	{
 		ray->step.y = 1;
-		ray->side_dist.y = player->pos.y - player->map_y;
+		ray->side_dist.y = player->map_y + 1 player->pos.y;
+	}
+}
+
+void	cast_rays(t_ray *ray)
+{
+	while (!ray->hit)
+	{
+		if (ray->side_dist.x < ray->side_dist.y)
+		{
+			ray->side_dist.x += delta_dist.x;
+			if (ray->step.x < 0)
+				ray->map_x -= 1;
+			else
+				ray->map_x += 1;
+		}
+		else	
+		{
+
+		}
+		if (ray->step.y < 0)
+		{
+
+		}
+		else
+		{
+
+		}
+		if (map[map_y][map_x] == WALL)
+			ray->hit = 1;
 	}
 }
