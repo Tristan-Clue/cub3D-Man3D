@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/13 18:16:14 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/14 21:33:23 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define WINDOW_HEIGHT	720
 # define RESO_WIDTH		640
 # define RESO_HEIGHT	360
+# define TEXTURE_SIZE	64
 
 # define SUCCESS		0
 # define FAILURE		1
@@ -50,6 +51,18 @@ typedef	struct tx
 	// NOTE: Struct containing texture image and requisites
 }			t_tx;
 
+typedef	struct render
+{
+	int		tx_height;
+	int		tx_start;
+	int		tx_end;
+	int		wall_hit;
+	int		tx_hit;
+	double	step;
+	double	tx_y;
+	int		tx_rend;
+}			t_render;
+
 typedef struct ray
 {
 	enum	e_wall
@@ -68,9 +81,6 @@ typedef struct ray
 	double	perp_dist;
 	int		wall;
 	int		hit;
-	int		wall_height;
-	int		col_begin;
-	int		col_end;
 }			t_ray;
 
 typedef	struct player
