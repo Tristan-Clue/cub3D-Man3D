@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/14 17:00:16 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/14 21:32:32 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,41 +91,61 @@ void	cast_rays(t_ray *ray)
 // and bottom will scale (Top deduct, bottom add)
 // Then if the values are below or over the WINDOW HEIGHT, cap it between
 // 0 to WINDOW_HEIGHT - 1
-void	get_height(t_ray *ray)
+void	get_height(t_ray *ray, t_render *render)
 {
-	ray->wall_height = (int)(WINDOW_HEIGHT / ray->perp_dist);
-	ray->col_begin = -ray->wall_height / 2 + WINDOW_HEIGHT / 2;
-	if (ray->col_begin < 0)
-		ray->col_begin = 0;
-	ray->col_end = ray->wall_height / 2 + WINDOW_HEIGHT / 2;
-	if (ray->col_end >= WINDOW_HEIGHT)
-		ray->col_end = WINDOW_HEIGHT - 1;
+	render->tx_height = (int)(WINDOW_HEIGHT / ray->perp_dist);
+	render->tx_start = -render->tx_height / 2 + WINDOW_HEIGHT / 2;
+	if (render->tx_start < 0)
+		render->tx_start = 0;
+	render->tx_end = render->tx_height / 2 + WINDOW_HEIGHT / 2;
+	if (render->tx_end >= WINDOW_HEIGHT)
+		render->tx_end = WINDOW_HEIGHT - 1;
 }
 
 // NOTE:
 // Gets the point of texture to print from
-// wall_x is obtained from the position of the player add
+// render->wall_hit is obtained from the position of the player add
 // the distance to the wall from the plane, depending on the wall (EW, NS)
 // scaled with the vector of the ray.
-// Then we get the decimal value of the wall_x, which signifies the %
+// Then we get the decimal value of the render->wall_hit, which signifies the %
 // of the wall to render for the column
 // After that, we get the texture coordinate to start rendering
 // Depending on which walls the ray hits in certain direction,
 // the texture will need to be mirrored
-// texture_x will contain the start coordinates of the texture to render
-void	get_texture(t_player *player, t_ray *ray)
+// render->tx_hit will contain the start coordinates of the texture to render
+void	get_texture(t_player *player, t_ray *ray, t_render *render)
 {
-	int	wall_x;
-	int	texture_x;
-
 	if (ray->wall == EW)
-		wall_x = player->pos.y + ray->perp_dist * ray->dir.y;
+		render->wall_hit = player->pos.y + ray->perp_dist * ray->dir.y;
 	else
-		wall_x = player->pos.x + ray->perp_dist * ray->dir.x;
-	wall_x -= floor(wall_x);
-	texture_x = (int)(wall_x * TEXTURE_SIZE);
+		render->wall_hit = player->pos.x + ray->perp_dist * ray->dir.x;
+	render->wall_hit -= floor(render->wall_hit);
+	render->tx_hit = (int)(render->wall_hit * TEXTURE_SIZE);
 	if (ray->wall == EW && ray->dir.x > 0)
-		texture_x = TEXTURE_SIZE - texture_x - 1;
+		render->tx_hit = TEXTURE_SIZE - render->tx_hit - 1;
 	if (ray->wall == NS && ray->dir.y < 0)
-		texture_x = TEXTURE_SIZE - texture_x - 1;
+		render->tx_hit = TEXTURE_SIZE - render->tx_hit - 1;
+	render->step = (1.0 * TEXTURE_SIZE / render->tx_height);
+	render->tx_y = (render->tx_start - WINDOW_HEIGHT / 2
+		+ render->tx_height * 2) * step;
+	while (i < render->tx_end)
+	{
+		render->tx_rend = (int)render->tx_y % TEXTURE_SIZE;
+		texture[render->tx_rend][x]
+	}
+}
+
+void	render_column(t_render *render, t_img *screen, int col)
+{
+	char	*px_addr
+	int		y;
+
+	y = render->tx_start;
+	while (y < render->tx_end)
+	{
+		px_addr = screen->addr + (int)(render->tx_hit * screen->line_len
+				+ col * (screen->bpp / 8));
+
+	}
+
 }
