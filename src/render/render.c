@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:58:17 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/12 17:19:25 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:59:36 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	render_pov(t_img *screen, t_player *player, t_map *map)
 		ray.cameraX = 2 * (col / RESO_WIDTH) - 1;
 		init_rays(player, &ray);	// Initiate current column ray
 		cast_rays(&ray);
-
+		get_height(&ray);
+		get_texture(player, &ray);
 		// What do with distance
 		// Get perpendicular distance
 		// Render wall texture based off distance
