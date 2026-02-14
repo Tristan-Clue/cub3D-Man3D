@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/11 23:29:48 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/13 18:16:14 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ typedef	struct tx
 
 typedef struct ray
 {
+	enum	e_wall
+	{
+		NS,
+		EW,
+	}		t_wall;
 	int		map_x;
 	int		map_y;
 	double	camera_x;
@@ -61,7 +66,11 @@ typedef struct ray
 	t_vec	step;
 	double	ray_dist;
 	double	perp_dist;
+	int		wall;
 	int		hit;
+	int		wall_height;
+	int		col_begin;
+	int		col_end;
 }			t_ray;
 
 typedef	struct player
