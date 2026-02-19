@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/14 21:33:23 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/20 07:49:45 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@
 # define KEY_DOWN		0b10
 # define KEY_LEFT		0b100
 # define KEY_RIGHT		0b1000
+# define KEY_W			0b10000
+# define KEY_A			0b100000
+# define KEY_S			0b1000000
+# define KEY_D			0b10000000
 
 typedef struct vec
 {
