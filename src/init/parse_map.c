@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/20 10:56:47 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/20 11:05:48 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+
+/* WARN: Double check tokenizer get_next_line logic
+ * TODO: Element tokenizing
+* */
 
 static int	open_file(const char *s, const char *format);
 
@@ -47,9 +51,8 @@ static t_list	*make_element_list(int fd, t_map *map)
 	char	*line;
 	int		count;
 
+	list = NULL;
 	line = get_next_line(fd);
-	if (!line)
-		perror_exit("Error\ncub3d");
 	while (line)
 	{
 		if (tokenize_element(&list, line))
@@ -57,8 +60,8 @@ static t_list	*make_element_list(int fd, t_map *map)
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	count = ft_lstsize(list);
+	if (count < 6)
 }
 
 int	tokenize_element(t_list **list, char *line)
