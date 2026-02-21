@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/20 10:14:25 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/21 14:30:28 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ typedef	struct render
 	int		tx_start;
 	int		tx_end;
 	int		wall_hit;
-	int		tx_hit;
+	int		tx_x;
 	double	step;
-	double	tx_y;
-	int		tx_rend;
+	double	tx_pos;
+	int		tx_y;
 }			t_render;
 
 typedef struct ray
