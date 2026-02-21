@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/14 21:32:32 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:27:45 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,37 +115,45 @@ void	get_height(t_ray *ray, t_render *render)
 // render->tx_hit will contain the start coordinates of the texture to render
 void	get_texture(t_player *player, t_ray *ray, t_render *render)
 {
+	int	i;
+
 	if (ray->wall == EW)
 		render->wall_hit = player->pos.y + ray->perp_dist * ray->dir.y;
 	else
 		render->wall_hit = player->pos.x + ray->perp_dist * ray->dir.x;
 	render->wall_hit -= floor(render->wall_hit);
-	render->tx_hit = (int)(render->wall_hit * TEXTURE_SIZE);
+	render->tx_x = (int)(render->wall_hit * TEXTURE_SIZE);
 	if (ray->wall == EW && ray->dir.x > 0)
-		render->tx_hit = TEXTURE_SIZE - render->tx_hit - 1;
+		render->tx_x = TEXTURE_SIZE - render->tx_x - 1;
 	if (ray->wall == NS && ray->dir.y < 0)
-		render->tx_hit = TEXTURE_SIZE - render->tx_hit - 1;
+		render->tx_x = TEXTURE_SIZE - render->tx_x - 1;
 	render->step = (1.0 * TEXTURE_SIZE / render->tx_height);
-	render->tx_y = (render->tx_start - WINDOW_HEIGHT / 2
+	render->tx_pos = (render->tx_start - WINDOW_HEIGHT / 2
 		+ render->tx_height * 2) * step;
 	while (i < render->tx_end)
 	{
 		render->tx_rend = (int)render->tx_y % TEXTURE_SIZE;
-		texture[render->tx_rend][x]
+		render->tx_y += render->step;
+		to_texture = texture[render->tx_rend][render->tx_x];
+		i++;
 	}
 }
 
 void	render_column(t_render *render, t_img *screen, int col)
 {
-	char	*px_addr
+	char	*px_addr;
+	int		color;
 	int		y;
 
 	y = render->tx_start;
 	while (y < render->tx_end)
 	{
-		px_addr = screen->addr + (int)(render->tx_hit * screen->line_len
+		render->tx_y = (int)render->tx_pos % TEXTURE_SIZE;
+		render->tx_pos += render->step;
+		color = texture[render->tx_y][render->tx_x];
+		px_addr = screen->addr + (int)(y * screen->line_len
 				+ col * (screen->bpp / 8));
-
+		*(unsigned int *)px_addr = color;
+		y++;
 	}
-
 }

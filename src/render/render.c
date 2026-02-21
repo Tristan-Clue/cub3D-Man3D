@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:58:17 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/14 21:32:45 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/18 18:03:09 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	render_pov(t_img *screen, t_player *player, t_map *map)
 	ray = (t_ray){0};
 	ray->map_x = floor(player->dir.x);
 	ray->map_y = floor(player->dir.y);
-	while (col < RESO_WIDTH)
+	while (col < SCREEN_WIDTH)
 	{
 		ray.cameraX = 2 * (col / SCREEN_WIDTH) - 1;
 		init_rays(player, &ray);	// Initiate current column ray
