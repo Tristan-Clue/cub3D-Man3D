@@ -20,9 +20,9 @@ OBJS_DIR	= build/
 SRCS_DIR		= src/
 
 SRC		= \
-			main.c		error.c		extract_xpm.c		
-#			init/post_parse.c		render/render.c						\
-#			render/ray_calculation.c				
+			main.c		error.c		extract_xpm.c		\
+			render/render_background.c
+#			render/render.c		render/ray_calculation.c				\
 
 OBJS_DIR	= build/
 
