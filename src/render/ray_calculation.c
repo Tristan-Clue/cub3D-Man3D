@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/21 14:27:45 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/23 13:03:47 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	get_height(t_ray *ray, t_render *render)
 // After that, we get the texture coordinate to start rendering
 // Depending on which walls the ray hits in certain direction,
 // the texture will need to be mirrored
-// render->tx_hit will contain the start coordinates of the texture to render
+// render->tx_x will contain the start coordinates of the texture to render
 void	get_texture(t_player *player, t_ray *ray, t_render *render)
 {
 	int	i;
@@ -130,13 +130,6 @@ void	get_texture(t_player *player, t_ray *ray, t_render *render)
 	render->step = (1.0 * TEXTURE_SIZE / render->tx_height);
 	render->tx_pos = (render->tx_start - WINDOW_HEIGHT / 2
 		+ render->tx_height * 2) * step;
-	while (i < render->tx_end)
-	{
-		render->tx_rend = (int)render->tx_y % TEXTURE_SIZE;
-		render->tx_y += render->step;
-		to_texture = texture[render->tx_rend][render->tx_x];
-		i++;
-	}
 }
 
 void	render_column(t_render *render, t_img *screen, int col)
@@ -150,7 +143,8 @@ void	render_column(t_render *render, t_img *screen, int col)
 	{
 		render->tx_y = (int)render->tx_pos % TEXTURE_SIZE;
 		render->tx_pos += render->step;
-		color = texture[render->tx_y][render->tx_x];
+		color = (int)texture[render->wall][render->tx_y
+				* tx->line_len + render->tx_x];
 		px_addr = screen->addr + (int)(y * screen->line_len
 				+ col * (screen->bpp / 8));
 		*(unsigned int *)px_addr = color;

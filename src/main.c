@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/06 09:44:48 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/23 13:23:28 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "cub3d.h"
 
 static int	init_mlx(t_data *data);
-static void	delete_map(t_map *map);
+static void	delete_mlx(t_data *data);
 //static void	setup_mlx_loop(t_data *data);
 
 int	main(int argc, char **argv)
@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 	/*  TODO: for execute
 	 * setup_mlx_loop(&data); // look below
 	 */
-
+	mlx_loop();
 	mlx_destroy_image(data.mlx, data.img.img_ptr);
 	mlx_destroy_display(data.mlx);
 	return (free(data.mlx), delete_map(&data.map), EXIT_SUCCESS);
@@ -56,33 +56,39 @@ static int	init_mlx(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		return (delete_map(&data->map), FAILURE);
-	data->window = mlx_new_window(data->mlx, FRAME_WIDTH, FRAME_HEIGHT, TITLE);
+		return (delete_mlx(data), FAILURE);
+	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH,
+			WINDOW_HEIGHT, TITLE);
 	if (!data->window)
-		return (delete_map(&data->map),
-			mlx_destroy_display(data->mlx), free(data->mlx), FAILURE);
+		return (delete_mlx(data), FAILURE);
 	data->img.img_ptr = mlx_new_image(data->mlx, FRAME_WIDTH, FRAME_HEIGHT);
 	if (!data->img.img_ptr)
-	{
-		mlx_destroy_window(data->mlx, data->window);
-		mlx_destroy_display(data->mlx);
-		return (free(data->mlx), delete_map(&data->map), FAILURE);
-	}
+		return (delete_map(data), FAILURE);
 	data->img.px = mlx_get_data_addr(data->img.img_ptr,
 			&data->img.bpp, &data->img.line_len, &data->img.endian);
 	if (!data->img.px)
 	{
-		mlx_destroy_image(data->mlx, data->img.img_ptr);
-		mlx_destroy_window(data->mlx, data->window);
-		mlx_destroy_display(data->mlx);
-		(void)(free(data->mlx), delete_map(&data->map));
+		delete_mlx(data);
 		error_exit("mlx_get_data_addr failure");
 	}
 	return (SUCCESS);
 }
 
+
+static void	delete_mlx(t_data *data)
+{
+	if (data->img.img_ptr)
+		mlx_destroy_image(data->mlx, data->img.img_ptr);
+	if (data->window)
+		mlx_destroy_window(data->mlx, data->window);
+	if (data->mlx)
+		mlx_destroy_display(data->mlx);
+	free (data->mlx);
+}
+
 static void	delete_map(t_map *map)
 {
+
 }
 
 /*
