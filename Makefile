@@ -21,8 +21,8 @@ SRCS_DIR		= src/
 
 SRC		= \
 			main.c		error.c		extract_xpm.c		\
-			render/render_background.c
-#			render/render.c		render/ray_calculation.c				\
+			render/render_background.c					\
+			render/render.c		render/ray_calculation.c			\
 
 OBJS_DIR	= build/
 

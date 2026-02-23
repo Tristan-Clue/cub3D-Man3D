@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:58:17 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/23 12:25:09 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/23 22:34:12 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	render_pov(t_img *screen, t_player *player, t_map *map)
 	render_background(screen, map);
 	ray = (t_ray){0};
 	render = (t_render){0};
-	ray->map_x = floor(player->dir.x);
-	ray->map_y = floor(player->dir.y);
-	while (col < SCREEN_WIDTH)
+	ray.map_x = floor(player->dir.x);
+	ray.map_y = floor(player->dir.y);
+	while (col < WINDOW_WIDTH)
 	{
-		ray.cameraX = 2 * (col / SCREEN_WIDTH) - 1;
+		ray.camera_x = 2 * (col / WINDOW_WIDTH) - 1;
 		init_rays(player, &ray);	// Initiate current column ray
-		cast_rays(&ray);
+		cast_rays(&ray, map);
 		get_height(&ray, &render);
 		get_texture(player, &ray, &render);
 		render_column(&render, screen, col);

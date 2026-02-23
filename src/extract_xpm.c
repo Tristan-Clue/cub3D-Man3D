@@ -6,14 +6,10 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 12:25:28 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/23 13:02:58 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/23 20:32:34 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <mlx.h>
 
-char	**extract_xpm(char *filename)
-{
-	
-}

@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/23 17:03:30 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/23 22:34:31 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 
 typedef enum e_direction
 {
+	ERROR,
 	NORTH,
 	SOUTH,
 	EAST,
@@ -56,7 +57,7 @@ typedef struct vec
 {
 	double	x;
 	double	y;
-}			t_vec
+}			t_vec;
 
 typedef	struct tx
 {
@@ -137,5 +138,15 @@ int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 uint8_t	get_red(int rgb);
 uint8_t	get_green(int rgb);
 uint8_t	get_blue(int rgb);
+
+/*			render			*/
+void	render_pov(t_img *screen, t_player *player, t_map *map);
+void	init_rays(t_player *player, t_ray *ray);
+void	cast_rays(t_ray *ray, t_map *map);
+void	get_height(t_ray *ray, t_render *render);
+void	get_texture(t_player *player, t_ray *ray, t_render *render);
+void	render_column(t_render *render, t_img *screen, int col);
+
+void	render_background(t_img *screen, t_map *map);
 
 #endif

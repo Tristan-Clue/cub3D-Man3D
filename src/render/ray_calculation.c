@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/23 13:03:47 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/23 22:38:09 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_rays(t_player *player, t_ray *ray)
 	else
 	{
 		ray->step.x = 1;
-		ray->side_dist.x = (player->map_x + 1 - player->pos.x)
+		ray->side_dist.x = (ray->map_x + 1 - player->pos.x)
 			* ray->delta_dist.x;
 	}
 	if (ray->dir.y < 0)
@@ -49,7 +49,7 @@ void	init_rays(t_player *player, t_ray *ray)
 	else
 	{
 		ray->step.y = 1;
-		ray->side_dist.y = (player->map_y + 1 player->pos.y)
+		ray->side_dist.y = (ray->map_y + 1 - player->pos.y)
 			* ray->delta_dist.y;
 	}
 }
@@ -59,29 +59,29 @@ void	init_rays(t_player *player, t_ray *ray)
 // Will continue to iterate until a wall is hit.
 // Distance will be recorded based on the perpendicular distance
 // from the camera plane.
-void	cast_rays(t_ray *ray)
+void	cast_rays(t_ray *ray, t_map *map)
 {
 	while (!ray->hit)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
-			ray->side_dist.x += delta_dist.x;
+			ray->side_dist.x += ray->delta_dist.x;
 			ray->map_x += ray->step.x;
 			ray->wall = EW;
 		}
 		else	
 		{
-			ray->side_dist.y += delta_dist.y;
+			ray->side_dist.y += ray->delta_dist.y;
 			ray->map_y += ray->step.y;
 			ray->wall = NS;
 		}
-		if (map[map_y][map_x] > 0)
+		if (map->layout[ray->map_y][ray->map_x] > 0)
 			ray->hit = 1;
 	}
 	if (ray->wall == EW)
-		ray->perp_dist = side_dist.x - delta_dist.x;
+		ray->perp_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
-		ray->perp_dist = side_dist.y - delta_dist.y;
+		ray->perp_dist = ray->side_dist.y - ray->delta_dist.y;
 }
 
 // NOTE:
@@ -115,8 +115,6 @@ void	get_height(t_ray *ray, t_render *render)
 // render->tx_x will contain the start coordinates of the texture to render
 void	get_texture(t_player *player, t_ray *ray, t_render *render)
 {
-	int	i;
-
 	if (ray->wall == EW)
 		render->wall_hit = player->pos.y + ray->perp_dist * ray->dir.y;
 	else
@@ -129,7 +127,7 @@ void	get_texture(t_player *player, t_ray *ray, t_render *render)
 		render->tx_x = TEXTURE_SIZE - render->tx_x - 1;
 	render->step = (1.0 * TEXTURE_SIZE / render->tx_height);
 	render->tx_pos = (render->tx_start - WINDOW_HEIGHT / 2
-		+ render->tx_height * 2) * step;
+		+ render->tx_height * 2) * render->step;
 }
 
 void	render_column(t_render *render, t_img *screen, int col)
@@ -143,6 +141,9 @@ void	render_column(t_render *render, t_img *screen, int col)
 	{
 		render->tx_y = (int)render->tx_pos % TEXTURE_SIZE;
 		render->tx_pos += render->step;
+		// FIX: Add map parameter to function
+		// Add a variable to struct that contains the wall that was hit NESW
+		// Texture struct????
 		color = (int)texture[render->wall][render->tx_y
 				* tx->line_len + render->tx_x];
 		px_addr = screen->addr + (int)(y * screen->line_len

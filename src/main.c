@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/23 20:44:19 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/23 22:27:10 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 static int	init_mlx(t_data *data);
 static void	delete_mlx(t_data *data);
 //static void	setup_mlx_loop(t_data *data);
+
 
 int	main(int argc, char **argv)
 {
@@ -48,6 +49,7 @@ int	main(int argc, char **argv)
 	/*  TODO: for execute
 	 * setup_mlx_loop(&data); // look below
 	 */
+	//mlx_put_image_to_window(data.mlx, data.window, data.img.img_ptr, 0, 0);
 	mlx_loop(data.mlx);
 	return (delete_mlx(&data), EXIT_SUCCESS);
 }
