@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/23 13:23:28 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/23 20:44:19 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (argc != 2)
-		error_exit("Wrong arguments\n<format = ./fdf [FILE]>");
+	(void)argv;
+	(void)argc;
+//	if (argc != 2)
+//		error_exit("Wrong arguments\n<format = ./fdf [FILE]>");
 	data = (t_data){0};
-	parse_map(&data.map, argv[1]);
+	//parse_map(&data.map, argv[1]);
 	if (init_mlx(&data) == FAILURE)
 		error_exit("mlx/window/image creation failure");
 
@@ -46,10 +48,8 @@ int	main(int argc, char **argv)
 	/*  TODO: for execute
 	 * setup_mlx_loop(&data); // look below
 	 */
-	mlx_loop();
-	mlx_destroy_image(data.mlx, data.img.img_ptr);
-	mlx_destroy_display(data.mlx);
-	return (free(data.mlx), delete_map(&data.map), EXIT_SUCCESS);
+	mlx_loop(data.mlx);
+	return (delete_mlx(&data), EXIT_SUCCESS);
 }
 
 static int	init_mlx(t_data *data)
@@ -61,9 +61,9 @@ static int	init_mlx(t_data *data)
 			WINDOW_HEIGHT, TITLE);
 	if (!data->window)
 		return (delete_mlx(data), FAILURE);
-	data->img.img_ptr = mlx_new_image(data->mlx, FRAME_WIDTH, FRAME_HEIGHT);
+	data->img.img_ptr = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!data->img.img_ptr)
-		return (delete_map(data), FAILURE);
+		return (delete_mlx(data), FAILURE);
 	data->img.px = mlx_get_data_addr(data->img.img_ptr,
 			&data->img.bpp, &data->img.line_len, &data->img.endian);
 	if (!data->img.px)
@@ -86,10 +86,12 @@ static void	delete_mlx(t_data *data)
 	free (data->mlx);
 }
 
+/*
 static void	delete_map(t_map *map)
 {
 
 }
+*/
 
 /*
  *  NOTE: OLD mlx loop setup from fdf

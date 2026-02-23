@@ -2,7 +2,7 @@ NAME		= Man3D
 
 CC			= cc
 CFLAGS		= -Wextra -Werror -Wall -g3 -O3
-IFLAGS		= -I$(INCLUDE)
+IFLAGS		= -I$(INCLUDE) -I$(LIBFT_LIB) -I$(LIBMLX_LIB)
 MLX_FLAGS	= -L/usr/lib -lXext -lX11 -lm -lz
 
 LIBFT		= $(LIBFT_DIR)/libft.a
@@ -11,22 +11,23 @@ INCLUDE		= include
 
 LIBMLX		= mlx_linux/libmlx_Linux.a
 
-LIBFT_LIB	= libft/includes
+ARCHIVE		= $(LIBFT) $(LIBMLX)
+
+LIBFT_LIB	= libft/include
 LIBMLX_LIB	= mlx_linux
 
 OBJS_DIR	= build/
-SRC_DIR		= src/
+SRCS_DIR		= src/
 
 SRC		= \
-			main.c		error.c		extract_xpm.c	init/parse_map.c	\
-			init/post_parse.c		render/render.c						\
-			render/ray_calculation.c				
+			main.c		error.c		extract_xpm.c		
+#			init/post_parse.c		render/render.c						\
+#			render/ray_calculation.c				
 
 OBJS_DIR	= build/
-SRCS_DIR	= build/
 
 SRCS_FILES	= $(addprefix $(SRCS_DIR), $(SRCS))
-OBJS		= $(SRCS:.c=.o)
+OBJS		= $(SRC:.c=.o)
 BUILD_OBJS	= $(addprefix $(OBJS_DIR), $(OBJS))
 
 vpath %.c 	$(SRCS_DIR)
@@ -37,12 +38,12 @@ CYAN	= \e[36m
 WHITE	= \e[0m
 
 .PHONY: all fclean clean re
-.SILENT:
+#.SILENT:
 
-all : $(NAME)
+all : $(OBJS_DIR) $(NAME)
 
-$(NAME): $(LIBFT) $(LIBMLX) $(OBJS_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(IFLAGS) $(BUILD_OBJS) $(MLX_FLAGS) -o $(NAME) $(LIBFT) $(LIBMLX)
+$(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
+	$(CC) $(CFLAGS) $(IFLAGS) $(BUILD_OBJS) $(ARCHIVE) $(MLX_FLAGS) -o $(NAME)
 	echo "Compiling $(GREEN)$(NAME)$(WHITE)..."
 
 $(OBJS_DIR):
