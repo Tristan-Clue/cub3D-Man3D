@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/21 14:30:28 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/23 17:03:30 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@
 # define KEY_A			0b100000
 # define KEY_S			0b1000000
 # define KEY_D			0b10000000
+
+typedef enum e_direction
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_direction;
 
 typedef struct vec
 {
@@ -102,7 +110,7 @@ typedef struct s_map
 	int		height;
 	int		floor_color;
 	int		ceiling_color;
-	t_tx	textures[4];
+	char	*textures[4];
 }			t_map;
 
 typedef struct s_img
