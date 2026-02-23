@@ -18,9 +18,9 @@ OBJS_DIR	= build/
 SRC_DIR		= src/
 
 SRC		= \
-			main.c	error.c		key_events.c	draw_fractol.c	panning.c	\
-			zooming.c		mouse.c		utils.c		color.c		newton.c	\
-			init.c
+			main.c		error.c		extract_xpm.c	init/parse_map.c	\
+			init/post_parse.c		render/render.c						\
+			render/ray_calculation.c				
 
 OBJS_DIR	= build/
 SRCS_DIR	= build/
@@ -68,6 +68,7 @@ fclean: clean
 
 clean:
 	make -C $(LIBFT_DIR) fclean
+	make -C $(LIBMLX_LIB) clean
 	rm -rf $(OBJS_DIR)
 	echo "Removing $(CYAN)object$(WHITE) files..."
 
