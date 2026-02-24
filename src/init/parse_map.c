@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/23 17:03:29 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/24 13:42:10 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 /* WARN: Double check get_pathr get_next_line logic
  * TODO: Element tokenizing
 * */
+
+void		parse_element(t_map *map, char *line);
 
 static int	open_file(const char *s, const char *format);
 
@@ -52,30 +54,10 @@ static void	get_elements(int fd, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (parse_element(map, line))
-			break ;
+		if (ft_strcmp(line, "\n"))
+			parse_element(map, line);
 		free(line);
 		line = get_next_line(fd);
 	}
-}
-
-static int	parse_element(t_map *map, char *line)
-{
-	if (!ft_strcmp(line, "\n"))
-		return (0);
-	else if (!ft_strncmp(line, "NO ", 3))
-		get_path(map, line, 'N');
-	else if (!ft_strncmp(line, "SO ", 3))
-		get_path(map, line, 'S');
-	else if (!ft_strncmp(line, "WE ", 3))
-		get_path(map, line, 'W');
-	else if (!ft_strncmp(line, "EA ", 3))
-		get_path(map, line, 'E');
-	else if (!ft_strncmp(line, "F ", 2))
-		get_color(map, line, 'F');
-	else if (!ft_strncmp(line, "C ", 2))
-		get_color(map, line, 'C');
-	else
-		return (1);
-	return (0);
+	if ()
 }
