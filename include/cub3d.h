@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/23 22:34:31 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/24 13:36:23 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # define SUCCESS		0
 # define FAILURE		1
+# define CEILING		0
+# define FLOOR			1
 
 # define PIXEL_WHITE	0xFFFFFF
 # define PIXEL_GREY		0x555555
@@ -46,12 +48,17 @@
 
 typedef enum e_direction
 {
-	ERROR,
 	NORTH,
 	SOUTH,
 	EAST,
 	WEST
 }	t_direction;
+
+typedef enum e_wall
+{
+	NS,
+	EW,
+}	t_wall;
 
 typedef struct vec
 {
@@ -78,11 +85,6 @@ typedef	struct render
 
 typedef struct ray
 {
-	enum	e_wall
-	{
-		NS,
-		EW,
-	}		t_wall;
 	int		map_x;
 	int		map_y;
 	double	camera_x;
@@ -106,11 +108,9 @@ typedef	struct player
 typedef struct s_map
 {
 	char	**layout;
-	int		width;
-	int		depth;
-	int		height;
 	int		floor_color;
 	int		ceiling_color;
+	char	bgcolor_set[2];
 	char	*textures[4];
 }			t_map;
 
