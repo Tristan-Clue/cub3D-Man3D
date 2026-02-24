@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/24 13:36:23 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/24 14:13:14 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ typedef	struct player
 typedef struct s_map
 {
 	char	**layout;
+	char	*textures[4];
 	int		floor_color;
 	int		ceiling_color;
 	char	bgcolor_set[2];
-	char	*textures[4];
 }			t_map;
 
 typedef struct s_img
@@ -133,6 +133,8 @@ typedef struct s_data
 
 void	error_exit(char *str);
 void	perror_exit(char *str);
+void	destroy_map(t_map *map);
+void	destroy_array(char **arr);
 
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 uint8_t	get_red(int rgb);

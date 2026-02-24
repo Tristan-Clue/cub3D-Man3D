@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/23 22:27:10 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:13:59 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int	main(int argc, char **argv)
 	data = (t_data){0};
 	//parse_map(&data.map, argv[1]);
 	if (init_mlx(&data) == FAILURE)
+	{
+		//destroy_map(data.map);
 		error_exit("mlx/window/image creation failure");
+	}
 
 	/*  TODO: for parsing
 	 * load_textures;
@@ -87,13 +90,6 @@ static void	delete_mlx(t_data *data)
 		mlx_destroy_display(data->mlx);
 	free (data->mlx);
 }
-
-/*
-static void	delete_map(t_map *map)
-{
-
-}
-*/
 
 /*
  *  NOTE: OLD mlx loop setup from fdf
