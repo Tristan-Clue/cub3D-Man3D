@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 17:55:29 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/25 18:06:41 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/25 18:31:29 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "cub3d.h"
 #include <stdbool.h>
 
+void		skip_spaces(char **tmp);
 static int	value_is_invalid(char *val);
 static void	set_bg_color(t_map *map, char **values, char type);
 static int	clamp_values(int value);
@@ -21,16 +22,19 @@ static int	clamp_values(int value);
 void	get_color(t_map *map, char *str, char type, int fd)
 {
 	char	**values;
+	char	*tmp;
 	int		i;
 
-	if (value_is_invalid(str + 2))
+	tmp = str;
+	skip_spaces(&tmp);
+	if (value_is_invalid(tmp))
 	{
 		free(str);
 		close(fd);
 		destroy_map(map);
 		error_exit("Error\ncub3d: Invalid bgcolor config");
 	}
-	values = ft_split(str + 2, ",");
+	values = ft_split(tmp, ",");
 	if (!values)
 	{
 		free(str);
@@ -40,6 +44,16 @@ void	get_color(t_map *map, char *str, char type, int fd)
 	}
 	set_bg_color(map, values, type);
 	destroy_array(values);
+	return ;
+}
+
+void	skip_spaces(char **tmp)
+{
+	while (**tmp == ' ')
+		(*tmp)++;
+	*tmp += 2;
+	while (**tmp == ' ')
+		(*tmp)++;
 	return ;
 }
 
