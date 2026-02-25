@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 13:25:04 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/24 16:12:51 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/25 15:19:42 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,22 @@ void	parse_element(t_map *map, char *line)
 
 static void	get_path(t_map *map, char *str, t_direction direction)
 {
-	if (!*str)
+	int	fd;
+
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
 	{
 		destroy_map(map);
-		error_exit("Error\ncub3d: Invalid config values");
+		perror_exit("Error\ncub3d");
 	}
+	close(fd);
+	map->textures[direction] = ft_strdup(str);
+	if (!map->textures[direction])
+	{
+		destroy_map(map);
+		perror_exit("Error\ncub3d");
+	}
+	return ;
 }
 
 static void	get_color(t_map *map, char *str, char type)
@@ -49,6 +60,6 @@ static void	get_color(t_map *map, char *str, char type)
 	if (!*str)
 	{
 		destroy_map(map);
-		error_exit("Error\ncub3d: Invalid config values");
+		error_exit("Error\ncub3d: Invalid bgcolor values");
 	}
 }
