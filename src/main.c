@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/24 14:13:59 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/25 15:12:27 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include "cub3d.h"
 
 static int	init_mlx(t_data *data);
-static void	delete_mlx(t_data *data);
 //static void	setup_mlx_loop(t_data *data);
 
 
@@ -53,7 +52,7 @@ int	main(int argc, char **argv)
 	 * setup_mlx_loop(&data); // look below
 	 */
 	//mlx_put_image_to_window(data.mlx, data.window, data.img.img_ptr, 0, 0);
-	mlx_loop(data.mlx);
+	event_loop(&data);
 	return (delete_mlx(&data), EXIT_SUCCESS);
 }
 
@@ -77,18 +76,6 @@ static int	init_mlx(t_data *data)
 		error_exit("mlx_get_data_addr failure");
 	}
 	return (SUCCESS);
-}
-
-
-static void	delete_mlx(t_data *data)
-{
-	if (data->img.img_ptr)
-		mlx_destroy_image(data->mlx, data->img.img_ptr);
-	if (data->window)
-		mlx_destroy_window(data->mlx, data->window);
-	if (data->mlx)
-		mlx_destroy_display(data->mlx);
-	free (data->mlx);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/24 14:13:14 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/25 15:23:46 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,11 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	t_map	map;
-	t_img	img;
-	void	*mlx;
-	void	*window;
+	t_map		map;
+	t_player	player;
+	t_img		img;
+	void		*mlx;
+	void		*window;
 }			t_data;
 
 void	error_exit(char *str);
@@ -150,5 +151,12 @@ void	get_texture(t_player *player, t_ray *ray, t_render *render);
 void	render_column(t_render *render, t_img *screen, int col);
 
 void	render_background(t_img *screen, t_map *map);
+
+/*			destroy			*/
+void	delete_mlx(t_data *data);
+int		destroy(t_data *data);
+
+/*			events			*/
+void	event_loop(t_data *data);
 
 #endif
