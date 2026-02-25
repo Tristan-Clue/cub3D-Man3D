@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/25 15:38:16 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/25 17:46:52 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@ static void	get_elements(int fd, t_map *map)
 			break ;
 		free(line);
 		line = get_next_line(fd);
+	}
+	if (!line || !map->bgcolor_set[CEILING] || !map->bgcolor_set[FLOOR]
+		|| !map->textures[NORTH] || !map->textures[SOUTH]
+		|| !map->textures[EAST] || !map->textures[WEST])
+	{
+		free(line);
+		close(fd);
+		destroy_map(map);
+		error_exit("Error\ncub3d: Invalid configs");
 	}
 	parse_layout(map, line, fd);
 	return ;
