@@ -6,12 +6,13 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/23 22:38:09 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:26:19 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
+#include <stdio.h>
 
 // NOTE: 
 // ray_dir being the vector of the ray, scaled with the camera
@@ -26,8 +27,8 @@
 
 void	init_rays(t_player *player, t_ray *ray)
 {
-	ray->dir.x = player->dir.x + player->plane.x / ray->camera_x;
-	ray->dir.y = player->dir.y + player->plane.y / ray->camera_x;
+	ray->dir.x = player->dir.x + player->plane.x * ray->camera_x;
+	ray->dir.y = player->dir.y + player->plane.y * ray->camera_x;
 	ray->delta_dist.x = fabs(1 / ray->dir.x);
 	ray->delta_dist.y = fabs(1 / ray->dir.y);
 	if (ray->dir.x < 0)
@@ -59,7 +60,7 @@ void	init_rays(t_player *player, t_ray *ray)
 // Will continue to iterate until a wall is hit.
 // Distance will be recorded based on the perpendicular distance
 // from the camera plane.
-void	cast_rays(t_ray *ray, t_map *map)
+void	cast_rays(t_ray *ray, char layout[MAX_MAP_SIZE][MAX_MAP_SIZE])
 {
 	while (!ray->hit)
 	{
@@ -75,7 +76,7 @@ void	cast_rays(t_ray *ray, t_map *map)
 			ray->map_y += ray->step.y;
 			ray->wall = NS;
 		}
-		if (map->layout[ray->map_y][ray->map_x] > 0)
+		if (layout[ray->map_y][ray->map_x] > 0)
 			ray->hit = 1;
 	}
 	if (ray->wall == EW)
@@ -116,9 +117,21 @@ void	get_height(t_ray *ray, t_render *render)
 void	get_texture(t_player *player, t_ray *ray, t_render *render)
 {
 	if (ray->wall == EW)
+	{
 		render->wall_hit = player->pos.y + ray->perp_dist * ray->dir.y;
+		if (ray->dir.x < 0)
+			render->wall_face = WEST;
+		else
+			render->wall_face = EAST;
+	}
 	else
+	{
 		render->wall_hit = player->pos.x + ray->perp_dist * ray->dir.x;
+		if (ray->dir.y < 0)
+			render->wall_face = NORTH;
+		else
+			render->wall_face = SOUTH;
+	}
 	render->wall_hit -= floor(render->wall_hit);
 	render->tx_x = (int)(render->wall_hit * TEXTURE_SIZE);
 	if (ray->wall == EW && ray->dir.x > 0)
@@ -127,9 +140,36 @@ void	get_texture(t_player *player, t_ray *ray, t_render *render)
 		render->tx_x = TEXTURE_SIZE - render->tx_x - 1;
 	render->step = (1.0 * TEXTURE_SIZE / render->tx_height);
 	render->tx_pos = (render->tx_start - WINDOW_HEIGHT / 2
-		+ render->tx_height * 2) * render->step;
+		+ render->tx_height / 2) * render->step;
 }
 
+void	render_column(t_render *render, t_img *screen, int col)
+{
+	char	*px_addr;
+	int		color;
+	int		y;
+
+	y = render->tx_start;
+	while (y < render->tx_end)
+	{
+		render->tx_y = (int)render->tx_pos % TEXTURE_SIZE;
+		render->tx_pos += render->step;
+		if (render->wall_face == WEST)
+			color = 0XFFC0CB;
+		else if (render->wall_face == EAST)
+			color = PIXEL_WHITE;
+		else if (render->wall_face == NORTH)
+			color = PIXEL_BLACK;
+		else
+			color = PIXEL_GREEN;
+		px_addr = screen->px + (int)(y * screen->line_len
+				+ col * (screen->bpp / 8));
+		*(int *)px_addr = color;
+		y++;
+	}
+}
+/*
+ * WIP: To be used with textures
 void	render_column(t_render *render, t_img *screen, int col)
 {
 	char	*px_addr;
@@ -152,3 +192,4 @@ void	render_column(t_render *render, t_img *screen, int col)
 		y++;
 	}
 }
+*/

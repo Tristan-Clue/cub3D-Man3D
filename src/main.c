@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/25 15:12:27 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:27:33 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,51 @@
 static int	init_mlx(t_data *data);
 //static void	setup_mlx_loop(t_data *data);
 
+void	init_player(t_player *player, char layout[MAX_MAP_SIZE][MAX_MAP_SIZE])
+{
+	player->pos.x = 3.0;
+	player->pos.y = 3.0;
+	if (layout[(int)player->pos.y][(int)player->pos.x] == 'N')
+	{
+		player->plane.x = 0.66;
+		player->plane.y = 0;
+		player->dir.x = 0;
+		player->dir.y = -1;
+	}
+	if (layout[(int)player->pos.y][(int)player->pos.x] == 'E')
+	{
+		player->plane.x = 0;
+		player->plane.y = 0.66;
+		player->dir.x = 1;
+		player->dir.y = 0;
+	}
+	if (layout[(int)player->pos.y][(int)player->pos.x] == 'S')
+	{
+		player->plane.x = -0.66;
+		player->plane.y = 0;
+		player->dir.x = 0;
+		player->dir.y = 1;
+	}
+	if (layout[(int)player->pos.y][(int)player->pos.x] == 'W')
+	{
+		player->plane.x = 0;
+		player->plane.y = -0.66;
+		player->dir.x = -1;
+		player->dir.y = 0;
+	}
+}
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	char lo[MAX_MAP_SIZE][MAX_MAP_SIZE] = {{1, 1, 1, 1, 1, 1, 1},
+					{1, 1, 0, 0, 0, 0, 1},
+					{1, 0, 0, 0, 0, 0, 1},
+					{1, 0, 0, 'S', 0, 0, 1},
+					{1, 0, 1, 0, 1, 0, 1},
+					{1, 0, 0, 0, 0, 0, 1},
+					{1, 1, 1, 1, 1, 1, 1}};
 	(void)argv;
 	(void)argc;
 //	if (argc != 2)
@@ -51,7 +91,7 @@ int	main(int argc, char **argv)
 	/*  TODO: for execute
 	 * setup_mlx_loop(&data); // look below
 	 */
-	//mlx_put_image_to_window(data.mlx, data.window, data.img.img_ptr, 0, 0);
+	init_player(&data.player, lo);
 	event_loop(&data);
 	return (delete_mlx(&data), EXIT_SUCCESS);
 }
