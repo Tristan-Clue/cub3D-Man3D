@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/25 15:23:46 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:25:30 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define RESO_WIDTH		640
 # define RESO_HEIGHT	360
 # define TEXTURE_SIZE	64
+
+# define MAX_MAP_SIZE	100
 
 # define SUCCESS		0
 # define FAILURE		1
@@ -45,6 +47,8 @@
 # define KEY_A			0b100000
 # define KEY_S			0b1000000
 # define KEY_D			0b10000000
+
+# define PAN_ANGLE		5
 
 typedef enum e_direction
 {
@@ -73,14 +77,15 @@ typedef	struct tx
 
 typedef	struct render
 {
-	int		tx_height;
-	int		tx_start;
-	int		tx_end;
-	int		wall_hit;
-	int		tx_x;
-	double	step;
-	double	tx_pos;
-	int		tx_y;
+	int			tx_height;
+	int			tx_start;
+	int			tx_end;
+	double		wall_hit;
+	int			tx_x;
+	double		step;
+	double		tx_pos;
+	int			tx_y;
+	t_direction	wall_face;
 }			t_render;
 
 typedef struct ray
@@ -145,7 +150,7 @@ uint8_t	get_blue(int rgb);
 /*			render			*/
 void	render_pov(t_img *screen, t_player *player, t_map *map);
 void	init_rays(t_player *player, t_ray *ray);
-void	cast_rays(t_ray *ray, t_map *map);
+void	cast_rays(t_ray *ray, char layout[MAX_MAP_SIZE][MAX_MAP_SIZE]);
 void	get_height(t_ray *ray, t_render *render);
 void	get_texture(t_player *player, t_ray *ray, t_render *render);
 void	render_column(t_render *render, t_img *screen, int col);
@@ -158,5 +163,8 @@ int		destroy(t_data *data);
 
 /*			events			*/
 void	event_loop(t_data *data);
+
+/*			event_camera	*/
+void	rotate_camera(int keysym, t_data *data);
 
 #endif

@@ -21,10 +21,10 @@ SRCS_DIR		= src/
 
 SRC		= \
 			main.c		error.c				\
-			destroy.c	event_loop.c
-#			extract_xpm.c
-#			render/render_background.c					\
-#			render/render.c		render/ray_calculation.c			\
+			destroy.c						\
+			render/render_background.c					\
+			render/render.c		render/ray_calculation.c			\
+			event/event_camera.c	event/event_loop.c
 
 OBJS_DIR	= build/
 
@@ -52,6 +52,7 @@ $(OBJS_DIR):
 	mkdir	$(OBJS_DIR)
 	mkdir	$(OBJS_DIR)/render
 	mkdir	$(OBJS_DIR)/init
+	mkdir	$(OBJS_DIR)/event
 
 $(LIBFT):
 	echo "Compiling libft functions..."
