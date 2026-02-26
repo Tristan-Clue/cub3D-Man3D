@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 14:02:36 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/24 14:13:20 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/26 17:49:59 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	destroy_map(t_map *map)
 	i = 0;
 	while (i < 4)
 		free(map->textures[i++]);
-	destroy_array(map->layout);
 	*map = (t_map){0};
 	return ;
 
