@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/26 16:27:33 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:54:53 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,17 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	char lo[MAX_MAP_SIZE][MAX_MAP_SIZE] = {{1, 1, 1, 1, 1, 1, 1},
+	(void)argv;
+	(void)argc;
+//	if (argc != 2)
+//		error_exit("Wrong arguments\n<format = ./fdf [FILE]>");
+	data = (t_data){.map.layout ={{1, 1, 1, 1, 1, 1, 1},
 					{1, 1, 0, 0, 0, 0, 1},
 					{1, 0, 0, 0, 0, 0, 1},
 					{1, 0, 0, 'S', 0, 0, 1},
 					{1, 0, 1, 0, 1, 0, 1},
 					{1, 0, 0, 0, 0, 0, 1},
-					{1, 1, 1, 1, 1, 1, 1}};
-	(void)argv;
-	(void)argc;
-//	if (argc != 2)
-//		error_exit("Wrong arguments\n<format = ./fdf [FILE]>");
-	data = (t_data){0};
+					{1, 1, 1, 1, 1, 1, 1}}};
 	//parse_map(&data.map, argv[1]);
 	if (init_mlx(&data) == FAILURE)
 	{
@@ -91,7 +90,7 @@ int	main(int argc, char **argv)
 	/*  TODO: for execute
 	 * setup_mlx_loop(&data); // look below
 	 */
-	init_player(&data.player, lo);
+	init_player(&data.player, data.map.layout);
 	event_loop(&data);
 	return (delete_mlx(&data), EXIT_SUCCESS);
 }

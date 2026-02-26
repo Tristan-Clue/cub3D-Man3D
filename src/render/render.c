@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:58:17 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/26 16:24:53 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:55:21 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,6 @@ void	render_pov(t_img *screen, t_player *player, t_map *map)
 	t_ray		ray;
 	t_render	render;
 
-	char lo[MAX_MAP_SIZE][MAX_MAP_SIZE] = {{1, 1, 1, 1, 1, 1, 1},
-					{1, 1, 0, 0, 0, 0, 1},
-					{1, 0, 0, 0, 0, 0, 1},
-					{1, 0, 0, 'S', 0, 0, 1},
-					{1, 0, 1, 0, 1, 0, 1},
-					{1, 0, 0, 0, 0, 0, 1},
-					{1, 1, 1, 1, 1, 1, 1}};
 	col = 0;
 	render_background(screen, map);
 	while (col < WINDOW_WIDTH)
@@ -47,7 +40,7 @@ void	render_pov(t_img *screen, t_player *player, t_map *map)
 		ray.hit = 0;
 		ray.camera_x = 2.0 * ((double)col / WINDOW_WIDTH) - 1.0;
 		init_rays(player, &ray);	// Initiate current column ray
-		cast_rays(&ray, lo);
+		cast_rays(&ray, map->layout);
 		get_height(&ray, &render);
 		get_texture(player, &ray, &render);
 		render_column(&render, screen, col);
