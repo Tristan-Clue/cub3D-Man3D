@@ -6,7 +6,11 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/02/27 13:49:58 by mjoon-yu         ###   ########.fr       */
+=======
+/*   Updated: 2026/02/27 14:26:40 by kchiang          ###   ########.fr       */
+>>>>>>> 18d282e08183b005efab6ec05486712114686725
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +122,7 @@ typedef struct s_map
 	int		floor_color;
 	int		ceiling_color;
 	char	bgcolor_set[2];
+	t_direction	starting_dir;
 }			t_map;
 
 typedef struct s_img
