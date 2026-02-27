@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/27 16:35:05 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/27 18:48:01 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,34 +86,6 @@ typedef	struct tx
 	int		height;
 }			t_tx;
 
-typedef	struct render
-{
-	int			tx_height;
-	int			tx_start;
-	int			tx_end;
-	double		wall_hit;
-	int			tx_x;
-	double		step;
-	double		tx_pos;
-	int			tx_y;
-	t_direction	wall_face;
-}			t_render;
-
-typedef struct ray
-{
-	int		map_x;
-	int		map_y;
-	double	camera_x;
-	t_vec	dir;
-	t_vec	delta_dist;
-	t_vec	side_dist;
-	t_vec	step;
-	double	ray_dist;
-	double	perp_dist;
-	int		wall;
-	int		hit;
-}			t_ray;
-
 typedef	struct player
 {
 	t_vec	pos;		// Player pos in world map
@@ -156,15 +128,7 @@ uint8_t	get_blue(int rgb);
 int		init_mlx(t_data *data);
 void	init_player(t_player *player, t_map *map);
 
-/*			render			*/
-void	render_pov(t_img *screen, t_player *player, t_map *map);
-void	init_rays(t_player *player, t_ray *ray);
-void	cast_rays(t_ray *ray, char layout[MAX_MAP_SIZE][MAX_MAP_SIZE]);
-void	get_height(t_ray *ray, t_render *render);
-void	get_texture(t_player *player, t_ray *ray, t_render *render);
-void	render_column(t_render *render, t_img *screen, int col);
 
-void	render_background(t_img *screen, t_map *map);
 
 /*			destroy			*/
 void	delete_mlx(t_data *data);

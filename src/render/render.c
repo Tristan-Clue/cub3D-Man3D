@@ -6,11 +6,11 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:58:17 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/26 16:55:21 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/27 19:05:18 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "render.h"
 #include <math.h>
 #include <stdio.h>
 
@@ -43,7 +43,7 @@ void	render_pov(t_img *screen, t_player *player, t_map *map)
 		cast_rays(&ray, map->layout);
 		get_height(&ray, &render);
 		get_texture(player, &ray, &render);
-		render_column(&render, screen, col);
+		render_column(&render, screen, map, col);
 		col++;
 	}
 }
