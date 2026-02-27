@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/27 14:52:35 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/27 14:55:11 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,12 @@ typedef	struct player
 
 typedef struct s_map
 {
-	char	layout[MAX_MAP_SIZE][MAX_MAP_SIZE];
-	char	*textures[4];	// NOTE: Could change this name to tx_path
-	t_img	tx_img[4];
-	int		floor_color;
-	int		ceiling_color;
-	char	bgcolor_set[2];
+	char		layout[MAX_MAP_SIZE][MAX_MAP_SIZE];
+	char		*tx_path[4];
+	t_tx		tx[4];
+	int			floor_color;
+	int			ceiling_color;
+	char		bgcolor_set[2];
 	t_direction	starting_dir;
 }			t_map;
 
@@ -154,7 +154,6 @@ uint8_t	get_blue(int rgb);
 /*			init			*/
 int		init_mlx(t_data *data);
 void	init_player(t_player *player, t_map *map);
-
 
 /*			render			*/
 void	render_pov(t_img *screen, t_player *player, t_map *map);

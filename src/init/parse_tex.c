@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 13:25:04 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/25 18:31:58 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/27 14:50:54 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	parse_tex(t_map *map, char *line, int fd)
 	tmp = line;
 	while (*tmp == ' ')
 		tmp++;
-	if (!ft_strncmp(tmp, "NO ", 3) && !map->textures[NORTH])
+	if (!ft_strncmp(tmp, "NO ", 3) && !map->tx_path[NORTH])
 		get_path(map, line, NORTH, fd);
-	else if (!ft_strncmp(tmp, "SO ", 3) && !map->textures[SOUTH])
+	else if (!ft_strncmp(tmp, "SO ", 3) && !map->tx_path[SOUTH])
 		get_path(map, line, SOUTH, fd);
-	else if (!ft_strncmp(tmp, "WE ", 3) && !map->textures[WEST])
+	else if (!ft_strncmp(tmp, "WE ", 3) && !map->tx_path[WEST])
 		get_path(map, line, WEST, fd);
-	else if (!ft_strncmp(tmp, "EA ", 3) && !map->textures[EAST])
+	else if (!ft_strncmp(tmp, "EA ", 3) && !map->tx_path[EAST])
 		get_path(map, line, EAST, fd);
 	else if (!ft_strncmp(tmp, "F ", 2) && !map->bgcolor_set[FLOOR])
 		get_color(map, line, 'F', fd);
@@ -57,8 +57,8 @@ static void	get_path(t_map *map, char *str, t_direction direction, int fd)
 		perror_exit("Error\ncub3d");
 	}
 	close(texfd);
-	map->textures[direction] = ft_strdup(tmp + 3);
-	if (!map->textures[direction])
+	map->tx_path[direction] = ft_strdup(tmp + 3);
+	if (!map->tx_path[direction])
 	{
 		free(str);
 		close(fd);
