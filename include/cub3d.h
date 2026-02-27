@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/27 15:54:00 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/27 16:35:05 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,20 @@ typedef struct vec
 	double	y;
 }			t_vec;
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*px;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_img;
+
 typedef	struct tx
 {
-	// NOTE: Struct containing texture image and requisites
+	t_img	img;
+	int		width;
+	int		height;
 }			t_tx;
 
 typedef	struct render
@@ -110,20 +121,11 @@ typedef	struct player
 	t_vec	dir;		// The vector of player facing direction
 }			t_player;
 
-typedef struct s_img
-{
-	void	*img_ptr;
-	char	*px;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}			t_img;
-
 typedef struct s_map
 {
 	char		layout[MAX_MAP_SIZE][MAX_MAP_SIZE];
 	char		*tx_path[4];
-	t_img		tx[4];
+	t_tx		tx[4];
 	int			floor_color;
 	int			ceiling_color;
 	char		bgcolor_set[2];
@@ -152,8 +154,7 @@ uint8_t	get_blue(int rgb);
 
 /*			init			*/
 int		init_mlx(t_data *data);
-void	init_player(t_player *player, char layout[MAX_MAP_SIZE][MAX_MAP_SIZE]);
-
+void	init_player(t_player *player, t_map *map);
 
 /*			render			*/
 void	render_pov(t_img *screen, t_player *player, t_map *map);
