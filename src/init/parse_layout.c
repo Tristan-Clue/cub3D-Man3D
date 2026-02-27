@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:10:25 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/26 17:48:56 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/27 16:30:51 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ static int	contain_illegal_ch(char *s)
 {
 	int	i;
 
+	if (s[0] == '\n')
+		return (true);
 	i = 0;
 	while (s[i])
 	{
 		if (i >= MAX_MAP_SIZE)
 			return (true);
 		if (!(s[i] == ' ' || s[i] == '0' || s[i] == '1' || s[i] == 'N'
-			|| s[i] == 'S' || s[i] == 'E' || s[i] == 'W'))
+			|| s[i] == 'S' || s[i] == 'E' || s[i] == 'W' || s[i] == '\n'))
 			return (true);
 		i++;
 	}
@@ -61,7 +63,7 @@ static void	copy_line(t_map *map, char *line, int row)
 	int	i;
 
 	i = 0;
-	while (line[i] && i < MAX_MAP_SIZE)
+	while (line[i] && line[i] != '\n' && i < MAX_MAP_SIZE)
 	{
 		map->layout[row][i] = line[i];
 		i++;

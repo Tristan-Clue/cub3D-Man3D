@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/27 14:49:22 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/27 15:54:00 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_map
 	int			floor_color;
 	int			ceiling_color;
 	char		bgcolor_set[2];
+	t_vec		starting_pos;
 	t_direction	starting_dir;
 }			t_map;
 
