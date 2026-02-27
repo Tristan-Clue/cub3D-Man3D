@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 13:19:22 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/27 13:36:20 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/27 19:56:03 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,24 @@ static void	set_vector(t_vec *vec, double x, double y)
 	vec->y = y;
 }
 
-void	init_player(t_player *player, char layout[MAX_MAP_SIZE][MAX_MAP_SIZE])
+void	init_player_dir(t_player *player, t_map *map)
 {
-	set_vector(&player->pos, 3.5, 3.5);
-	if (layout[(int)player->pos.y][(int)player->pos.x] == 'N')
+	if (map->starting_dir == NORTH)
 	{
 		set_vector(&player->plane, 0.66, 0);
 		set_vector(&player->dir, 0, -1);
 	}
-	if (layout[(int)player->pos.y][(int)player->pos.x] == 'E')
+	if (map->starting_dir == EAST)
 	{
 		set_vector(&player->plane, 0, 0.66);
 		set_vector(&player->dir, 1, 0);
 	}
-	if (layout[(int)player->pos.y][(int)player->pos.x] == 'S')
+	if (map->starting_dir == SOUTH)
 	{
 		set_vector(&player->plane, -0.66, 0);
 		set_vector(&player->dir, 0, 1);
 	}
-	if (layout[(int)player->pos.y][(int)player->pos.x] == 'W')
+	if (map->starting_dir == WEST)
 	{
 		set_vector(&player->plane, 0, 0.66);
 		set_vector(&player->dir, -1, 0);
