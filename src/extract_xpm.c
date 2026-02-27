@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 12:25:28 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/24 12:22:59 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/27 14:27:01 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,37 @@
 */
 // NOTE: void	*mlx_xpm_file_to_image(void *mlx_ptr,
 // 				char *filename, int *width, int *height);
-// 		Function will put the texture into the image pointer.
-// 		Image will have to be created using mlx_new_image
+// 		Function will put the texture into a new image pointer.
 
-void	assign_textures(t_map *map)	// Include struct with file names for NESW
+
+static void	delete_tx_img(void *mlx, t_map *map)
 {
-	// WIP: Function will call function, check files beforehand during parsing?
-	// Initialize image pointers for the textures
-	// Image will be used for sampling to the screen during extraction for render
+	if (map->tx[0].img.img_ptr)
+		mlx_destroy_image(mlx, map->tx[0].img.img_ptr);
+	if (map->tx[1].img.img_ptr)
+		mlx_destroy_image(mlx, map->tx[1].img.img_ptr);
+	if (map->tx[2].img.img_ptr)
+		mlx_destroy_image(mlx, map->tx[2].img.img_ptr);
+	if (map->tx[3].img.img_ptr)
+		mlx_destroy_image(mlx, map->tx[3].img.img_ptr);
+}
+
+int	assign_textures(void *mlx, t_map *map)
+{
+	map->tx[0].img.img_ptr = mlx_xpm_file_to_image(mlx,
+					map->textures[0], &map->tx[0].width, &map->tx[0].height);
+	map->tx[1].img.img_ptr = mlx_xpm_file_to_image(mlx,
+					map->textures[1], &map->tx[1].width, &map->tx[1].height);
+	map->tx[2].img.img_ptr = mlx_xpm_file_to_image(mlx,
+					map->textures[2], &map->tx[2].width, &map->tx[2].height);
+	map->tx[3].img.img_ptr = mlx_xpm_file_to_image(mlx,
+					map->textures[3], &map->tx[3].width, &map->tx[3].height);
+	if (!map->tx[0].img.img_ptr || !map->tx[1].img.img_ptr
+	 || !map->tx[2].img.img_ptr || !map->tx[3].img.img_ptr)
+	{
+		delete_tx_img(mlx, map);
+		return (FAILURE);
+	}
+	// HACK: Texture path no longer in use after extracting xpm
+	return (SUCCESS);
 }
