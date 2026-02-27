@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/27 14:39:17 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/27 14:49:22 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,6 @@ typedef	struct player
 	t_vec	dir;		// The vector of player facing direction
 }			t_player;
 
-typedef struct s_map
-{
-	char	layout[MAX_MAP_SIZE][MAX_MAP_SIZE];
-	char	*textures[4];	// NOTE: Could change this name to tx_path
-	t_img	tx_img[4];
-	int		floor_color;
-	int		ceiling_color;
-	char	bgcolor_set[2];
-	t_direction	starting_dir;
-}			t_map;
-
 typedef struct s_img
 {
 	void	*img_ptr;
@@ -129,6 +118,17 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }			t_img;
+
+typedef struct s_map
+{
+	char		layout[MAX_MAP_SIZE][MAX_MAP_SIZE];
+	char		*tx_path[4];
+	t_img		tx[4];
+	int			floor_color;
+	int			ceiling_color;
+	char		bgcolor_set[2];
+	t_direction	starting_dir;
+}			t_map;
 
 typedef struct s_data
 {

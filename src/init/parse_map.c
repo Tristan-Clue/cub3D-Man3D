@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/25 17:46:52 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/27 14:50:19 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static void	get_elements(int fd, t_map *map)
 		line = get_next_line(fd);
 	}
 	if (!line || !map->bgcolor_set[CEILING] || !map->bgcolor_set[FLOOR]
-		|| !map->textures[NORTH] || !map->textures[SOUTH]
-		|| !map->textures[EAST] || !map->textures[WEST])
+		|| !map->tx_path[NORTH] || !map->tx_path[SOUTH]
+		|| !map->tx_path[EAST] || !map->tx_path[WEST])
 	{
 		free(line);
 		close(fd);
