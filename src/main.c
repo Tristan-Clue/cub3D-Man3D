@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/26 16:54:53 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/27 13:24:17 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,42 +18,7 @@
 #include "libft.h"
 #include "cub3d.h"
 
-static int	init_mlx(t_data *data);
 //static void	setup_mlx_loop(t_data *data);
-
-void	init_player(t_player *player, char layout[MAX_MAP_SIZE][MAX_MAP_SIZE])
-{
-	player->pos.x = 3.0;
-	player->pos.y = 3.0;
-	if (layout[(int)player->pos.y][(int)player->pos.x] == 'N')
-	{
-		player->plane.x = 0.66;
-		player->plane.y = 0;
-		player->dir.x = 0;
-		player->dir.y = -1;
-	}
-	if (layout[(int)player->pos.y][(int)player->pos.x] == 'E')
-	{
-		player->plane.x = 0;
-		player->plane.y = 0.66;
-		player->dir.x = 1;
-		player->dir.y = 0;
-	}
-	if (layout[(int)player->pos.y][(int)player->pos.x] == 'S')
-	{
-		player->plane.x = -0.66;
-		player->plane.y = 0;
-		player->dir.x = 0;
-		player->dir.y = 1;
-	}
-	if (layout[(int)player->pos.y][(int)player->pos.x] == 'W')
-	{
-		player->plane.x = 0;
-		player->plane.y = -0.66;
-		player->dir.x = -1;
-		player->dir.y = 0;
-	}
-}
 
 int	main(int argc, char **argv)
 {
@@ -72,10 +37,7 @@ int	main(int argc, char **argv)
 					{1, 1, 1, 1, 1, 1, 1}}};
 	//parse_map(&data.map, argv[1]);
 	if (init_mlx(&data) == FAILURE)
-	{
-		//destroy_map(data.map);
 		error_exit("mlx/window/image creation failure");
-	}
 
 	/*  TODO: for parsing
 	 * load_textures;
@@ -95,27 +57,7 @@ int	main(int argc, char **argv)
 	return (delete_mlx(&data), EXIT_SUCCESS);
 }
 
-static int	init_mlx(t_data *data)
-{
-	data->mlx = mlx_init();
-	if (!data->mlx)
-		return (delete_mlx(data), FAILURE);
-	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH,
-			WINDOW_HEIGHT, TITLE);
-	if (!data->window)
-		return (delete_mlx(data), FAILURE);
-	data->img.img_ptr = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (!data->img.img_ptr)
-		return (delete_mlx(data), FAILURE);
-	data->img.px = mlx_get_data_addr(data->img.img_ptr,
-			&data->img.bpp, &data->img.line_len, &data->img.endian);
-	if (!data->img.px)
-	{
-		delete_mlx(data);
-		error_exit("mlx_get_data_addr failure");
-	}
-	return (SUCCESS);
-}
+
 
 /*
  *  NOTE: OLD mlx loop setup from fdf
