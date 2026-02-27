@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/27 18:48:01 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/27 20:48:08 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef enum e_wall
 	EW,
 }	t_wall;
 
-typedef struct vec
+typedef struct s_vec
 {
 	double	x;
 	double	y;
@@ -79,14 +79,14 @@ typedef struct s_img
 	int		endian;
 }			t_img;
 
-typedef	struct tx
+typedef	struct s_tx
 {
 	t_img	img;
 	int		width;
 	int		height;
 }			t_tx;
 
-typedef	struct player
+typedef	struct s_player
 {
 	t_vec	pos;		// Player pos in world map
 	t_vec	plane;		// Vector of the camera plane, perpendicular to
@@ -127,8 +127,6 @@ uint8_t	get_blue(int rgb);
 /*			init			*/
 int		init_mlx(t_data *data);
 void	init_player(t_player *player, t_map *map);
-
-
 
 /*			destroy			*/
 void	delete_mlx(t_data *data);
