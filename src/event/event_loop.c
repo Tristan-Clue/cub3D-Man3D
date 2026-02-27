@@ -6,24 +6,37 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 14:01:11 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/26 14:00:48 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/27 20:46:06 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <mlx.h>
 #include <X11/keysym.h>
+#include <X11/X.h>
 #include <stdio.h>
 
 static int	handle_mouse(int button, int x, int y, t_data *data);
 static int	handle_keys(int	keysym, t_data *data);
 static int	handle_idle(t_data *data);
 
+// NOTE: 	Expose required for redraw?
+// 			Check FocusIn/Out requirements to reset flags
+// 			Setting flags for hold keys
+
 void	event_loop(t_data *data)
 {
-	mlx_mouse_hook(data->window, &handle_mouse, data);
-	mlx_key_hook(data->window, &handle_keys, data);
 	mlx_loop_hook(data->mlx, &handle_idle, data);
+	mlx_hook(data->window, KeyPress, KeyPressMask, &handle_hold, data);
+	mlx_hook(data->window, KeyRelease, KeyReleaseMask, &handle_release, data);
+	mlx_hook(data->window, ButtonPress, ButtonPressMask, &handle_hold, data);
+	mlx_hook(data->window, ButtonRelease, ButtonReleaseMask,
+		&handle_release, data);
+	mlx_hook(data->window, MotionNotify, PointerMotionMash,
+		&handle_motion, data);
+	mlx_hook(data->window, Expose, ExposureMask, &handle_idle, data);
+	mlx_hook(data->window, FocusIn, FocusChangeMask, &reset_flag, data);
+	mlx_hook(data->window, FocusOut, FocusChangeMask, &reset_flag, data);
 	if (data->window)
 		mlx_hook(data->window, 17, 0L, &destroy, data);
 	mlx_loop(data->mlx);
