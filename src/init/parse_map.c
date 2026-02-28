@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/27 16:31:50 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/28 17:30:37 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <fcntl.h>
 
 int			parse_tex(t_map *map, char *line, int fd);
+void		parse_player_pos(t_map *map);
 
 static void	get_elements(int fd, t_map *map);
 static void	check_layout(t_map *map);
@@ -34,7 +35,7 @@ void	parse_map(t_map *map, const char *s)
 		perror_exit("Error\ncub3d");
 	get_elements(fd, map);
 	close(fd);
-	check_player_pos(map);	// TODO:
+	parse_player_pos(map);	// TODO:
 	check_layout(map);		// TODO:
 	return ;
 }
