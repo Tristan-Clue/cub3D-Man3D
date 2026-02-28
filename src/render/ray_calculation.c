@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/27 19:07:41 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/28 20:08:12 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	init_rays(t_player *player, t_ray *ray)
 // Will continue to iterate until a wall is hit.
 // Distance will be recorded based on the perpendicular distance
 // from the camera plane.
-void	cast_rays(t_ray *ray, char layout[MAX_MAP_SIZE][MAX_MAP_SIZE])
+void	cast_rays(t_ray *ray, t_map *map)
 {
 	while (!ray->hit)
 	{
@@ -70,13 +70,13 @@ void	cast_rays(t_ray *ray, char layout[MAX_MAP_SIZE][MAX_MAP_SIZE])
 			ray->map_x += ray->step.x;
 			ray->wall = EW;
 		}
-		else	
+		else
 		{
 			ray->side_dist.y += ray->delta_dist.y;
 			ray->map_y += ray->step.y;
 			ray->wall = NS;
 		}
-		if (layout[ray->map_y][ray->map_x] > 0)
+		if (map->layout[ray->map_y][ray->map_x] > 0)
 			ray->hit = 1;
 	}
 	if (ray->wall == EW)
@@ -180,7 +180,7 @@ void	render_column(t_render *render, t_img *screen, t_map *map, int col)
 	y = render->tx_start;
 	while (y < render->tx_end)
 	{
-		render->tx_y = (int)render->tx_pos % TEXTURE_SIZE;
+		render->tx_y = (int)render->tx_pos % (TEXTURE_SIZE - 1);
 		render->tx_pos += render->step;
 		color = (int)map->tx[render->wall_face].img.px
 			+ (render->tx_y * map->tx[render->wall_face].img.line_len)

@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 22:24:43 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/23 22:26:25 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/28 20:10:41 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	render_background(t_img *screen, t_map *map)
 	int		y;
 	char	*pixel;
 
-	(void)map;	// To be removed when background color is given
 	y = 0;
 	while (y < WINDOW_HEIGHT)
 	{
@@ -30,11 +29,9 @@ void	render_background(t_img *screen, t_map *map)
 		{
 			pixel = screen->px + (y * screen->line_len) + x * (screen->bpp / 8);
 			if (y < WINDOW_HEIGHT / 2)
-				*(unsigned int *)pixel = PIXEL_RED;
-				// *(unsigned int *)pixel = map->ceiling;
+				*(unsigned int *)pixel = map->ceiling_color;
 			else
-				*(unsigned int *)pixel = PIXEL_BLUE;
-				// *(unsinged int *)pixel = map->floor;
+				*(unsinged int *)pixel = map->floor_color;
 			x++;
 		}
 		y++;

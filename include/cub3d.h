@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/28 15:31:19 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/28 20:07:35 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ typedef enum e_direction
 	EAST,
 	WEST
 }	t_direction;
-
-typedef enum e_wall
-{
-	NS,
-	EW,
-}	t_wall;
 
 typedef struct s_vec
 {
@@ -137,6 +131,9 @@ uint8_t	get_blue(int rgb);
 /*			init			*/
 int		init_mlx(t_data *data);
 void	init_player(t_player *player, t_map *map);
+
+/*			render			*/
+void	render_pov(t_img *screen, t_player *player, t_map *map);
 
 /*			destroy			*/
 void	delete_mlx(t_data *data);

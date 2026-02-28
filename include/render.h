@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 17:53:22 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/27 17:55:42 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/28 20:07:39 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ typedef	struct render
 
 typedef struct ray
 {
+	typedef enum e_wall
+	{
+		NS,
+		EW,
+	}	t_wall;
 	int		map_x;
 	int		map_y;
 	double	camera_x;
@@ -44,13 +49,11 @@ typedef struct ray
 	int		hit;
 }			t_ray;
 
-/*			render			*/
-void	render_pov(t_img *screen, t_player *player, t_map *map);
 void	init_rays(t_player *player, t_ray *ray);
-void	cast_rays(t_ray *ray, char layout[MAX_MAP_SIZE][MAX_MAP_SIZE]);
+void	cast_rays(t_ray *ray, t_map *map);
 void	get_height(t_ray *ray, t_render *render);
 void	get_texture(t_player *player, t_ray *ray, t_render *render);
-void	render_column(t_render *render, t_img *screen, int col);
+void	render_column(t_render *render, t_img *screen, t_map *map, int col);
 void	render_background(t_img *screen, t_map *map);
 
 #endif
