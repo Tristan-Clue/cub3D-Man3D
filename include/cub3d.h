@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/27 20:48:08 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/28 15:31:19 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # define KEY_D			0b10000000
 
 # define PAN_ANGLE		5
+# define MOUSE_SENSE	10
 
 typedef enum e_direction
 {
@@ -86,6 +87,14 @@ typedef	struct s_tx
 	int		height;
 }			t_tx;
 
+typedef struct s_input
+{
+	int	movement;
+	int	rotation;
+	int	mouse_x;
+	int	mouse_y;
+}			t_input;
+
 typedef	struct s_player
 {
 	t_vec	pos;		// Player pos in world map
@@ -109,6 +118,7 @@ typedef struct s_data
 {
 	t_map		map;
 	t_player	player;
+	t_input		input;
 	t_img		img;
 	void		*mlx;
 	void		*window;
