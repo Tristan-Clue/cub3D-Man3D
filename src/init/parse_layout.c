@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:10:25 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/27 16:30:51 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/28 17:29:36 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	parse_layout(t_map *map, char *line, int fd)
 		row++;
 		line = get_next_line(fd);
 	}
+	if (row > map->row_number)
+		map->row_number = row;
 	return ;
 }
 
@@ -68,5 +70,7 @@ static void	copy_line(t_map *map, char *line, int row)
 		map->layout[row][i] = line[i];
 		i++;
 	}
+	if (i > map->col_number)
+		map->col_number = i;
 	return ;
 }
