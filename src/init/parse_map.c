@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/28 17:30:37 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/02/28 23:54:09 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		parse_player_pos(t_map *map);
 
 static void	get_elements(int fd, t_map *map);
 static void	check_layout(t_map *map);
-static void	init_mask(char mask[][MAX_MAP_SIZE]);
+static void	init_2d_grid(char grid[][MAX_MAP_SIZE], int value);
 
 void	parse_map(t_map *map, const char *s)
 {
@@ -35,8 +35,8 @@ void	parse_map(t_map *map, const char *s)
 		perror_exit("Error\ncub3d");
 	get_elements(fd, map);
 	close(fd);
-	parse_player_pos(map);	// TODO:
-	check_layout(map);		// TODO:
+	parse_player_pos(map);
+	check_layout(map);
 	return ;
 }
 
@@ -62,6 +62,7 @@ static void	get_elements(int fd, t_map *map)
 		destroy_map(map);
 		error_exit("Error\ncub3d: Invalid configs");
 	}
+	init_2d_grid(map->layout, ' ');
 	parse_layout(map, line, fd);
 	return ;
 }
@@ -70,10 +71,10 @@ static void	check_layout(t_map *map)
 {
 	char	mask[MAX_MAP_SIZE][MAX_MAP_SIZE];
 
-	init_mask(mask);
+	init_2d_grid(mask, false);
 }
 
-static void	init_mask(char mask[][MAX_MAP_SIZE])
+static void	init_2d_grid(char grid[][MAX_MAP_SIZE], int value)
 {
 	int	i;
 	int	j;
@@ -83,7 +84,7 @@ static void	init_mask(char mask[][MAX_MAP_SIZE])
 	{
 		j = 0;
 		while (j < MAX_MAP_SIZE)
-			mask[i][j++] = false;
+			grid[i][j++] = value;
 		i++;
 	}
 	return ;
