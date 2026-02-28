@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 14:01:11 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/27 20:46:06 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/28 15:24:24 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ static int	handle_idle(t_data *data);
 void	event_loop(t_data *data)
 {
 	mlx_loop_hook(data->mlx, &handle_idle, data);
-	mlx_hook(data->window, KeyPress, KeyPressMask, &handle_hold, data);
-	mlx_hook(data->window, KeyRelease, KeyReleaseMask, &handle_release, data);
-	mlx_hook(data->window, ButtonPress, ButtonPressMask, &handle_hold, data);
+	mlx_hook(data->window, KeyPress, KeyPressMask,
+		&handle_key_press, data);
+	mlx_hook(data->window, KeyRelease, KeyReleaseMask,
+		&handle_key_release, data);
+	mlx_hook(data->window, ButtonPress, ButtonPressMask,
+		&handle_mouse_press, data);
 	mlx_hook(data->window, ButtonRelease, ButtonReleaseMask,
-		&handle_release, data);
+		&handle_mouse_release, data);
 	mlx_hook(data->window, MotionNotify, PointerMotionMash,
 		&handle_motion, data);
 	mlx_hook(data->window, Expose, ExposureMask, &handle_idle, data);
@@ -49,6 +52,7 @@ static int	handle_idle(t_data *data)
 	return (SUCCESS);
 }
 
+/*
 static int	handle_keys(int	keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
@@ -68,3 +72,4 @@ static int	handle_mouse(int button, int x, int y, t_data *data)
 	(void)y;
 	return (SUCCESS);
 }
+*/
