@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/28 15:31:19 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/02/28 17:12:52 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 
 typedef enum e_direction
 {
+	UNINITIALIZED,
 	NORTH,
 	SOUTH,
 	EAST,
