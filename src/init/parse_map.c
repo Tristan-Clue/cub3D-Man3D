@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/28 23:54:09 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/01 16:41:07 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 int			parse_tex(t_map *map, char *line, int fd);
 void		parse_player_pos(t_map *map);
+int			scan_space(t_map *map, char mask[][MAX_MAP_SIZE], int row, int col);
 
 static void	get_elements(int fd, t_map *map);
 static void	check_layout(t_map *map);
@@ -72,6 +73,12 @@ static void	check_layout(t_map *map)
 	char	mask[MAX_MAP_SIZE][MAX_MAP_SIZE];
 
 	init_2d_grid(mask, false);
+	if (scan_space(map, mask, map->row_number, map->col_number) == FAILURE)
+	{
+		destroy_map(map);
+		error_exit("Error\ncub3d: Invalid map");
+	}
+	return ;
 }
 
 static void	init_2d_grid(char grid[][MAX_MAP_SIZE], int value)
