@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/28 20:12:59 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/02 15:12:37 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct s_map
 	int			col_number;
 	t_vec		starting_pos;
 	t_direction	starting_dir;
-}			t_map;
+}				t_map;
 
 typedef struct s_data
 {
