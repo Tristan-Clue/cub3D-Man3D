@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 20:20:39 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/28 21:52:06 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/02 13:50:17 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,26 @@ static void	movement_a(t_player *player, t_map *map)
 {
 	int	x;
 	int	y;
-	// WIP: How does strafing work?
-	x = floor(player->pos.x + player->dir.x * MOVE_SPEED);
-	y = floor(player->pos.y + player->dir.y * MOVE_SPEED);
+	x = floor(player->pos.x + player->plane.x * MOVE_SPEED);
+	y = floor(player->pos.y + player->plane.y * MOVE_SPEED);
 	if (map->layout[player->pos.y][x] != 1)
 		player->pos.x = x;
 	if (map->layout[y][player->pos.x] != 1)
 		player->pos.y = y;
 }
 
+static void	movement_d(t_player *player, t_map *map)
+{
+	int	x;
+	int	y;
+
+	x = floor(player->pos.x - player->plane.x * MOVE_SPEED);
+	y = floor(player->pos.y - player->plane.y * MOVE_SPEED);
+	if (map->layout[player->pos.y][x] != 1)
+		player->pos.x = x;
+	if (map->layout[y][player->pos.x] != 1)
+		player->pos.y = y;
+}
 void	handle_movement(t_input *input, t_player *player, t_map *map)
 {
 	if (input->movement & KEY_W)
