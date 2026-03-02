@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 17:41:56 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 18:19:17 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@
 
 typedef enum e_direction
 {
-	UNINITIALIZED,
 	NORTH,
 	SOUTH,
 	EAST,
-	WEST
+	WEST,
+	UNINITIALIZED,
 }	t_direction;
 
 typedef struct s_vec
