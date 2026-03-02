@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/01 16:41:07 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 14:53:22 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int			scan_space(t_map *map, char mask[][MAX_MAP_SIZE], int row, int col);
 static void	get_elements(int fd, t_map *map);
 static void	check_layout(t_map *map);
 static void	init_2d_grid(char grid[][MAX_MAP_SIZE], int value);
+static int	mask_has_error(t_map *map, char mask[][MAX_MAP_SIZE]);
 
 void	parse_map(t_map *map, const char *s)
 {
@@ -73,7 +74,8 @@ static void	check_layout(t_map *map)
 	char	mask[MAX_MAP_SIZE][MAX_MAP_SIZE];
 
 	init_2d_grid(mask, false);
-	if (scan_space(map, mask, map->row_number, map->col_number) == FAILURE)
+	if (scan_space(map, mask, map->starting_pos.y,
+			map->starting_pos.x) == FAILURE || mask_has_error(map, mask))
 	{
 		destroy_map(map);
 		error_exit("Error\ncub3d: Invalid map");
@@ -95,4 +97,24 @@ static void	init_2d_grid(char grid[][MAX_MAP_SIZE], int value)
 		i++;
 	}
 	return ;
+}
+
+static int	mask_has_error(t_map *map, char mask[][MAX_MAP_SIZE])
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	while (row < map->row_number)
+	{
+		col = 0;
+		while (col < map->col_number)
+		{
+			if (map->layout[row][col] != ' ' && mask[row][col] == false)
+				return (true);
+			col++;
+		}
+		row++;
+	}
+	return (false);
 }
