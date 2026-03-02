@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 15:46:35 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 14:25:53 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 15:58:49 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	scan_space(t_map *map, char mask[][MAX_MAP_SIZE], int row, int col)
 	if (map->layout[row][col] == '0'
 		|| (row == map->starting_pos.x && col == map->starting_pos.y))
 	{
-		mask[row][col] == true;
+		mask[row][col] = true;
 		return (scan_space(map, mask, row - 1, col)
 			|| scan_space(map, mask, row + 1, col)
 			|| scan_space(map, mask, row, col - 1)
@@ -46,7 +46,7 @@ static int	scan_wall(t_map *map, char mask[][MAX_MAP_SIZE], int row, int col)
 		return (scan_space(map, mask, row, col));
 	if (map->layout[row][col] == '1')
 	{
-		mask[row][col] == true;
+		mask[row][col] = true;
 		return (scan_wall(map, mask, row - 1, col)
 			|| scan_wall(map, mask, row + 1, col)
 			|| scan_wall(map, mask, row, col - 1)
