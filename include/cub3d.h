@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 18:23:12 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 19:29:47 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ uint8_t	get_blue(int rgb);
 /*			init			*/
 void	parse_map(t_map *map, const char *s);
 int		init_mlx(t_data *data);
-void	init_player(t_player *player, t_map *map);
+void	init_player_dir(t_player *player, t_map *map);
 int		assign_tx_path(void *mlx, t_map *map);
 
 /*			render			*/

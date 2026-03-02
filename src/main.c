@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 17:42:16 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/02 19:29:54 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 		delete_mlx(&data);
 		error_exit("Textures not loaded");
 	}
-	init_player(&data.player, &data.map);
+	init_player_dir(&data.player, &data.map);
 	event_loop(&data);
 	return (delete_mlx(&data), EXIT_SUCCESS);
 }
