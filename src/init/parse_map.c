@@ -6,19 +6,22 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 16:48:11 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 18:07:11 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "cub3d.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 int			parse_tex(t_map *map, char *line, int fd);
 void		parse_player_pos(t_map *map);
 int			scan_space(t_map *map, char mask[][MAX_MAP_SIZE], int row, int col);
+void	parse_layout(t_map *map, char *line, int fd);
 
 static void	get_elements(int fd, t_map *map);
 static void	check_layout(t_map *map);
@@ -46,7 +49,6 @@ static void	get_elements(int fd, t_map *map)
 {
 	char	*line;
 
-	list = NULL;
 	line = get_next_line(fd);
 	while (line)
 	{

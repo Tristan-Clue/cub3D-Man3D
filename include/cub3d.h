@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 18:19:17 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 18:23:12 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ uint8_t	get_blue(int rgb);
 void	parse_map(t_map *map, const char *s);
 int		init_mlx(t_data *data);
 void	init_player(t_player *player, t_map *map);
+int		assign_tx_path(void *mlx, t_map *map);
 
 /*			render			*/
 void	render_pov(t_img *screen, t_player *player, t_map *map);
@@ -151,8 +152,5 @@ void	detect_input(t_data *data);
 void	update_data(t_data *data);
 void	rotate_camera(t_input *input, t_player *player);
 void	handle_movement(t_input *input, t_player *player, t_map *map);
-
-/*			event_camera	*/
-void	rotate_camera(int keysym, t_data *data);
 
 #endif
