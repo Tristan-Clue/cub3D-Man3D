@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 17:53:22 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/28 20:07:39 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/02 15:13:48 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdint.h>
 # include "cub3d.h"
 
-typedef	struct render
+typedef struct render
 {
 	int			tx_height;
 	int			tx_start;

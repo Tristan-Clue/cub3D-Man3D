@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 15:12:37 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 15:13:29 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_img
 	int		endian;
 }			t_img;
 
-typedef	struct s_tx
+typedef struct s_tx
 {
 	t_img	img;
 	int		width;
@@ -90,7 +90,7 @@ typedef struct s_input
 	int	mouse_y;
 }			t_input;
 
-typedef	struct s_player
+typedef struct s_player
 {
 	t_vec	pos;		// Player pos in world map
 	t_vec	plane;		// Vector of the camera plane, perpendicular to
