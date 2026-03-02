@@ -6,12 +6,14 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 15:46:35 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 16:41:55 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 17:19:52 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdbool.h>
+
+static int	scan_wall(t_map *map, char mask[][MAX_MAP_SIZE], int row, int col);
 
 int	scan_space(t_map *map, char mask[][MAX_MAP_SIZE], int row, int col)
 {
