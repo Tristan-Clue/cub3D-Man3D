@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 17:19:01 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 18:21:44 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 19:26:57 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	parse_player_pos(t_map *map)
 	int	row;
 	int	col;
 
-	map->starting_dir == UNINITIALIZED;
+	map->starting_dir = UNINITIALIZED;
 	row = 0;
 	while (row < map->row_number)
 	{
