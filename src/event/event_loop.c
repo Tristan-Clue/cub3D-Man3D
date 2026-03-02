@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 14:01:11 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/02 15:16:48 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/02 17:51:52 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include <X11/keysym.h>
 #include <X11/X.h>
 #include <stdio.h>
-
-static void	detect_input(t_data *data);
-static int	handle_idle(t_data *data);
 
 // NOTE: 	Expose required for redraw?
 // 			Check FocusIn/Out requirements to reset flags

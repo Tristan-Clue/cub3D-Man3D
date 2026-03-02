@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 14:24:08 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/02 15:17:45 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/02 18:00:26 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	handle_key_press(int keysym, t_data *data);
 static int	handle_key_release(int keysym, t_data *data);
 static int	handle_motion(int x, int y, t_data *data);
 static int	reset_flag(t_data *data);
+static int	handle_idle(t_data *data);
 
 void	detect_input(t_data *data)
 {
@@ -42,7 +43,7 @@ void	detect_input(t_data *data)
 //		&handle_mouse_press, data);
 //	mlx_hook(data->window, ButtonRelease, ButtonReleaseMask,
 //		&handle_mouse_release, data);
-	mlx_hook(data->window, MotionNotify, PointerMotionMash,
+	mlx_hook(data->window, MotionNotify, PointerMotionMask,
 		&handle_motion, data);
 // BUG:	mlx_hook(data->window, Expose, ExposureMask, &handle_idle, data);
 	// Check if needed;
@@ -62,10 +63,11 @@ static int	handle_key_press(int keysym, t_data *data)
 		data->input.movement |= KEY_A;
 	if (keysym == XK_D)
 		data->input.movement |= KEY_D;
-	if (keysym == XK_LEFT)
+	if (keysym == XK_Left)
 		data->input.rotation |= KEY_LEFT;
-	if (keysym == XK_RIGHT)
+	if (keysym == XK_Right)
 		data->input.rotation |= KEY_RIGHT;
+	return (SUCCESS);
 }
 
 static int	handle_key_release(int keysym, t_data *data)
@@ -78,10 +80,11 @@ static int	handle_key_release(int keysym, t_data *data)
 		data->input.movement &= ~KEY_A;
 	if (keysym == XK_D)
 		data->input.movement &= ~KEY_D;
-	if (keysym == XK_LEFT)
+	if (keysym == XK_Left)
 		data->input.rotation &= ~KEY_LEFT;
-	if (keysym == XK_RIGHT)
+	if (keysym == XK_Right)
 		data->input.rotation &= ~KEY_RIGHT;
+	return (SUCCESS);
 }
 /*
 int	handle_mouse_press(int button, int x, int y, t_data *data)
@@ -99,12 +102,21 @@ int	handle_mouse_release(int button, int x, int y, t_data *data)
 // (Higher mouse sense, slower rotate)
 static int	handle_motion(int x, int y, t_data *data)
 {
+	(void)y;
 	data->input.rot_angle = (x - data->input.mouse_x) / MOUSE_SENSE;
 	data->input.mouse_x = x;
+	return (SUCCESS);
 }
 
 static int	reset_flag(t_data *data)
 {
-	data->movement = 0;
-	data->rotation = 0;
+	data->input.movement = 0;
+	data->input.rotation = 0;
+	return (SUCCESS);
+}
+
+static int	handle_idle(t_data *data)
+{
+	(void)data;
+	return (SUCCESS);
 }

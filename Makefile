@@ -20,13 +20,20 @@ OBJS_DIR	= build/
 SRCS_DIR		= src/
 
 SRC		= \
-			main.c		error.c				\
-			destroy.c						\
+			main.c		error.c		cleanup.c			\
+			color.c	extract_xpm.c	destroy.c			\
+			event/detect_input.c	event/event_camera.c	\
+			event/event_loop.c		event/movement.c		\
+			event/update_data.c								\
+			init/flood_fill.c		init/parse_layout.c		\
+			init/parse_player_pos.c	init/parse_tex_utility.c	\
+			init/init.c				init/parse_map.c		\
+			init/parse_tex.c								\
 			render/render_background.c					\
 			render/render.c		render/ray_calculation.c			\
-			event/event_camera.c	event/event_loop.c
 
 OBJS_DIR	= build/
+
 
 SRCS_FILES	= $(addprefix $(SRCS_DIR), $(SRCS))
 OBJS		= $(SRC:.c=.o)

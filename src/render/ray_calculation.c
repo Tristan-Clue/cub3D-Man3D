@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/28 20:08:12 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/02 17:50:30 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void	render_column(t_render *render, t_img *screen, int col)
 void	render_column(t_render *render, t_img *screen, t_map *map, int col)
 {
 	char	*px_addr;
-	int		color;
+	char	*color;
 	int		y;
 
 	y = render->tx_start;
@@ -182,12 +182,12 @@ void	render_column(t_render *render, t_img *screen, t_map *map, int col)
 	{
 		render->tx_y = (int)render->tx_pos % (TEXTURE_SIZE - 1);
 		render->tx_pos += render->step;
-		color = (int)map->tx[render->wall_face].img.px
+		color = (map->tx[render->wall_face].img.px
 			+ (render->tx_y * map->tx[render->wall_face].img.line_len)
-			+ render->tx_x * (map->tx[render->wall_face].img.bpp / 8);
-		px_addr = screen->addr + (int)(y * screen->line_len
+			+ render->tx_x * (map->tx[render->wall_face].img.bpp / 8));
+		px_addr = screen->px + (int)(y * screen->line_len
 				+ col * (screen->bpp / 8));
-		*(unsigned int *)px_addr = color;
+		*(unsigned int *)px_addr = *color;
 		y++;
 	}
 }

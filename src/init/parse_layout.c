@@ -6,13 +6,15 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:10:25 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 14:54:12 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 18:04:03 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "cub3d.h"
 #include <stdbool.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 static int	contain_illegal_ch(char *s);
 static void	copy_line(t_map *map, char *line, int row);

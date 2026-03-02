@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 17:53:22 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/02 15:13:48 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 17:47:36 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include <stdint.h>
 # include "cub3d.h"
+
+typedef enum e_wall
+{
+	NS,
+	EW,
+}	t_wall;
 
 typedef struct render
 {
@@ -31,11 +37,6 @@ typedef struct render
 
 typedef struct ray
 {
-	typedef enum e_wall
-	{
-		NS,
-		EW,
-	}	t_wall;
 	int		map_x;
 	int		map_y;
 	double	camera_x;
@@ -46,6 +47,7 @@ typedef struct ray
 	double	ray_dist;
 	double	perp_dist;
 	int		wall;
+	int		wall_face;
 	int		hit;
 }			t_ray;
 

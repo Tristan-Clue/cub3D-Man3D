@@ -6,13 +6,15 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 17:55:29 by kchiang           #+#    #+#             */
-/*   Updated: 2026/02/25 18:31:29 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 18:05:20 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "cub3d.h"
 #include <stdbool.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 void		skip_spaces(char **tmp);
 static int	value_is_invalid(char *val);
@@ -23,7 +25,6 @@ void	get_color(t_map *map, char *str, char type, int fd)
 {
 	char	**values;
 	char	*tmp;
-	int		i;
 
 	tmp = str;
 	skip_spaces(&tmp);
@@ -80,9 +81,9 @@ static int	value_is_invalid(char *val)
 
 static void	set_bg_color(t_map *map, char **values, char type)
 {
-	const int	r = clamp_value(ft_atoi(values[0]));
-	const int	g = clamp_value(ft_atoi(values[1]));
-	const int	b = clamp_value(ft_atoi(values[2]));
+	const int	r = clamp_values(ft_atoi(values[0]));
+	const int	g = clamp_values(ft_atoi(values[1]));
+	const int	b = clamp_values(ft_atoi(values[2]));
 
 	if (type == 'F')
 	{
