@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:10:25 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 18:04:03 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/03 01:59:29 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ static int	contain_illegal_ch(char *s)
 	if (s[0] == '\n')
 		return (true);
 	i = 0;
-	while (s[i])
+	while (s[i] && s[i] != '\n')
 	{
 		if (i >= MAX_MAP_SIZE)
 			return (true);
 		if (!(s[i] == ' ' || s[i] == '0' || s[i] == '1' || s[i] == 'N'
-				|| s[i] == 'S' || s[i] == 'E' || s[i] == 'W' || s[i] == '\n'))
+				|| s[i] == 'S' || s[i] == 'E' || s[i] == 'W'))
 			return (true);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 17:55:29 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 18:05:20 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/03 01:47:13 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <unistd.h>
 
 void		skip_spaces(char **tmp);
+
 static int	value_is_invalid(char *val);
 static void	set_bg_color(t_map *map, char **values, char type);
 static int	clamp_values(int value);
@@ -63,9 +64,9 @@ static int	value_is_invalid(char *val)
 	int	i;
 	int	comma;
 
-	i = -1;
+	i = 0;
 	comma = 0;
-	while (val[++i])
+	while (val[i] && val[i] != '\n')
 	{
 		if (val[i] == ',')
 		{
@@ -75,6 +76,7 @@ static int	value_is_invalid(char *val)
 		}
 		else if (!ft_isdigit(val[i]))
 			return (true);
+		i++;
 	}
 	return (!ft_isdigit(val[--i]) || comma != 2);
 }
