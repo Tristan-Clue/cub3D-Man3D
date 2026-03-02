@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 15:13:29 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 15:35:19 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 
 # define PAN_ANGLE		5
 # define MOUSE_SENSE	10
+# define MOVE_SPEED		1
 
 typedef enum e_direction
 {
@@ -88,6 +89,7 @@ typedef struct s_input
 	int	rotation;
 	int	mouse_x;
 	int	mouse_y;
+	int	rot_angle;
 }			t_input;
 
 typedef struct s_player
@@ -144,6 +146,10 @@ int		destroy(t_data *data);
 
 /*			events			*/
 void	event_loop(t_data *data);
+void	detect_input(t_data *data);
+void	update_data(t_data *data);
+void	rotate_camera(t_input *input, t_player *player);
+void	handle_movement(t_input *input, t_player *player, t_map *map);
 
 /*			event_camera	*/
 void	rotate_camera(int keysym, t_data *data);
