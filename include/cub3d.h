@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 15:35:19 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/02 17:41:36 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,5 @@ void	detect_input(t_data *data);
 void	update_data(t_data *data);
 void	rotate_camera(t_input *input, t_player *player);
 void	handle_movement(t_input *input, t_player *player, t_map *map);
-
-/*			event_camera	*/
-void	rotate_camera(int keysym, t_data *data);
 
 #endif
