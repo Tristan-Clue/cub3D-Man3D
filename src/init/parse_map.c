@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/02 14:53:22 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/02 16:48:11 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ static void	check_layout(t_map *map)
 	char	mask[MAX_MAP_SIZE][MAX_MAP_SIZE];
 
 	init_2d_grid(mask, false);
-	if (scan_space(map, mask, map->starting_pos.y,
-			map->starting_pos.x) == FAILURE || mask_has_error(map, mask))
+	if (scan_space(map, mask, (int)map->starting_pos.y,
+			(int)map->starting_pos.x) == FAILURE || mask_has_error(map, mask))
 	{
 		destroy_map(map);
 		error_exit("Error\ncub3d: Invalid map");
