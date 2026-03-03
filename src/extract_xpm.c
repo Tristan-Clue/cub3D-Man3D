@@ -6,12 +6,13 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 12:25:28 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/03 14:04:28 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/03 15:15:07 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <mlx.h>
+#include <stdlib.h>
 
 /*
  * NOTE:
@@ -76,5 +77,9 @@ int	assign_tx_path(void *mlx, t_map *map)
 		delete_tx_img(mlx, map);
 		return (FAILURE);
 	}
+	free(map->tx_path[0]);
+	free(map->tx_path[1]);
+	free(map->tx_path[2]);
+	free(map->tx_path[3]);
 	return (SUCCESS);
 }

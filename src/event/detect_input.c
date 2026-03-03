@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 14:24:08 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/03 14:23:05 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/03 15:05:45 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,13 @@ void	detect_input(t_data *data)
 
 static int	handle_key_press(int keysym, t_data *data)
 {
-	printf("%d\n", keysym);
-	if (keysym == XK_W)
+	if (keysym == XK_w)
 		data->input.movement |= KEY_W;
-	if (keysym == XK_S)
+	if (keysym == XK_s)
 		data->input.movement |= KEY_S;
-	if (keysym == XK_A)
+	if (keysym == XK_a)
 		data->input.movement |= KEY_A;
-	if (keysym == XK_D)
+	if (keysym == XK_d)
 		data->input.movement |= KEY_D;
 	if (keysym == XK_Left)
 		data->input.rotation |= KEY_LEFT;
@@ -74,13 +73,13 @@ static int	handle_key_press(int keysym, t_data *data)
 
 static int	handle_key_release(int keysym, t_data *data)
 {
-	if (keysym == XK_W)
+	if (keysym == XK_w)
 		data->input.movement &= ~KEY_W;
-	if (keysym == XK_S)
+	if (keysym == XK_s)
 		data->input.movement &= ~KEY_S;
-	if (keysym == XK_A)
+	if (keysym == XK_a)
 		data->input.movement &= ~KEY_A;
-	if (keysym == XK_D)
+	if (keysym == XK_d)
 		data->input.movement &= ~KEY_D;
 	if (keysym == XK_Left)
 		data->input.rotation &= ~KEY_LEFT;

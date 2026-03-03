@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/03 14:40:32 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/03 15:07:58 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 
 # define PAN_ANGLE		5
 # define MOUSE_SENSE	10
-# define MOVE_SPEED		1
+# define MOVE_SPEED		0.33
 
 typedef enum e_direction
 {
