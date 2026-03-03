@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 14:24:08 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/02 18:00:26 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/03 14:23:05 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <mlx.h>
 #include <X11/keysym.h>
 #include <X11/X.h>
+#include <stdio.h>
 
 /*
 * Prototypes
@@ -30,11 +31,9 @@ static int	handle_key_press(int keysym, t_data *data);
 static int	handle_key_release(int keysym, t_data *data);
 static int	handle_motion(int x, int y, t_data *data);
 static int	reset_flag(t_data *data);
-static int	handle_idle(t_data *data);
 
 void	detect_input(t_data *data)
 {
-	mlx_loop_hook(data->mlx, &handle_idle, data);
 	mlx_hook(data->window, KeyPress, KeyPressMask,
 		&handle_key_press, data);
 	mlx_hook(data->window, KeyRelease, KeyReleaseMask,
@@ -55,6 +54,7 @@ void	detect_input(t_data *data)
 
 static int	handle_key_press(int keysym, t_data *data)
 {
+	printf("%d\n", keysym);
 	if (keysym == XK_W)
 		data->input.movement |= KEY_W;
 	if (keysym == XK_S)
@@ -67,6 +67,8 @@ static int	handle_key_press(int keysym, t_data *data)
 		data->input.rotation |= KEY_LEFT;
 	if (keysym == XK_Right)
 		data->input.rotation |= KEY_RIGHT;
+	if (keysym == XK_Escape)
+		destroy(data);
 	return (SUCCESS);
 }
 
@@ -112,11 +114,5 @@ static int	reset_flag(t_data *data)
 {
 	data->input.movement = 0;
 	data->input.rotation = 0;
-	return (SUCCESS);
-}
-
-static int	handle_idle(t_data *data)
-{
-	(void)data;
 	return (SUCCESS);
 }

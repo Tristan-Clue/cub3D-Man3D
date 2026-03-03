@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/02 17:50:30 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/03 14:32:01 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	cast_rays(t_ray *ray, t_map *map)
 			ray->map_y += ray->step.y;
 			ray->wall = NS;
 		}
-		if (map->layout[ray->map_y][ray->map_x] > 0)
+		if (map->layout[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
 	}
 	if (ray->wall == EW)
@@ -180,14 +180,14 @@ void	render_column(t_render *render, t_img *screen, t_map *map, int col)
 	y = render->tx_start;
 	while (y < render->tx_end)
 	{
-		render->tx_y = (int)render->tx_pos % (TEXTURE_SIZE - 1);
+		render->tx_y = (int)render->tx_pos % TEXTURE_SIZE;
 		render->tx_pos += render->step;
 		color = (map->tx[render->wall_face].img.px
 			+ (render->tx_y * map->tx[render->wall_face].img.line_len)
 			+ render->tx_x * (map->tx[render->wall_face].img.bpp / 8));
 		px_addr = screen->px + (int)(y * screen->line_len
 				+ col * (screen->bpp / 8));
-		*(unsigned int *)px_addr = *color;
+		*(unsigned int *)px_addr = *(unsigned int *)color;
 		y++;
 	}
 }

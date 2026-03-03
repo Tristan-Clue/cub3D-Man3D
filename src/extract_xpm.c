@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 12:25:28 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/02/27 14:49:43 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/03 14:04:28 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,26 @@ static void	delete_tx_img(void *mlx, t_map *map)
 		mlx_destroy_image(mlx, map->tx[3].img.img_ptr);
 }
 
+static int	get_addr_tx(t_map *map)
+{
+	map->tx[0].img.px = mlx_get_data_addr(map->tx[0].img.img_ptr,
+				&map->tx[0].img.bpp, &map->tx[0].img.line_len,
+				&map->tx[0].img.endian);
+	map->tx[1].img.px = mlx_get_data_addr(map->tx[1].img.img_ptr,
+				&map->tx[1].img.bpp, &map->tx[1].img.line_len,
+				&map->tx[1].img.endian);
+	map->tx[2].img.px = mlx_get_data_addr(map->tx[2].img.img_ptr,
+				&map->tx[2].img.bpp, &map->tx[2].img.line_len,
+				&map->tx[2].img.endian);
+	map->tx[3].img.px = mlx_get_data_addr(map->tx[3].img.img_ptr,
+				&map->tx[3].img.bpp, &map->tx[3].img.line_len,
+				&map->tx[3].img.endian);
+	if (!map->tx[0].img.px || !map->tx[1].img.px
+		|| !map->tx[2].img.px || !map->tx[3].img.px)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
 int	assign_tx_path(void *mlx, t_map *map)
 {
 	map->tx[0].img.img_ptr = mlx_xpm_file_to_image(mlx,
@@ -51,11 +71,10 @@ int	assign_tx_path(void *mlx, t_map *map)
 	map->tx[3].img.img_ptr = mlx_xpm_file_to_image(mlx,
 					map->tx_path[3], &map->tx[3].width, &map->tx[3].height);
 	if (!map->tx[0].img.img_ptr || !map->tx[1].img.img_ptr
-	 || !map->tx[2].img.img_ptr || !map->tx[3].img.img_ptr)
+	 || !map->tx[2].img.img_ptr || !map->tx[3].img.img_ptr || get_addr_tx(map))
 	{
 		delete_tx_img(mlx, map);
 		return (FAILURE);
 	}
-	// HACK: Texture path no longer in use after extracting xpm
 	return (SUCCESS);
 }
