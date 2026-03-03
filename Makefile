@@ -4,6 +4,7 @@ CC			= cc
 CFLAGS		= -Wextra -Werror -Wall -g3 -O3
 IFLAGS		= -I$(INCLUDE) -I$(LIBFT_LIB) -I$(LIBMLX_LIB)
 MLX_FLAGS	= -L/usr/lib -lXext -lX11 -lm -lz
+MATH		= -lm
 
 LIBFT		= $(LIBFT_DIR)/libft.a
 LIBFT_DIR	= libft
@@ -52,7 +53,7 @@ WHITE	= \e[0m
 all : $(OBJS_DIR) $(NAME)
 
 $(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
-	$(CC) $(CFLAGS) $(IFLAGS) $(BUILD_OBJS) $(ARCHIVE) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(IFLAGS) $(BUILD_OBJS) $(ARCHIVE) $(MLX_FLAGS) $(MATH) -o $(NAME)
 	echo "Compiling $(GREEN)$(NAME)$(WHITE)..."
 
 $(OBJS_DIR):
@@ -66,7 +67,7 @@ $(LIBFT):
 	make --no-print-directory -C $(LIBFT_DIR)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(IFLAGS) $(MLX_FLAGS) -c $< -o $(addprefix $(OBJS_DIR), $@)
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $(addprefix $(OBJS_DIR), $@)
 	echo "Compiling $(CYAN)$@$(WHITE)..."
 
 $(LIBMLX):
