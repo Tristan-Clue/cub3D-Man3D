@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/03 14:32:01 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/05 11:06:25 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	get_height(t_ray *ray, t_render *render)
 // Depending on which walls the ray hits in certain direction,
 // the texture will need to be mirrored
 // render->tx_x will contain the start coordinates of the texture to render
-void	get_texture(t_player *player, t_ray *ray, t_render *render)
+void	get_texture(t_player *player, t_ray *ray, t_render *render, t_map *map)
 {
 	if (ray->wall == EW)
 	{
@@ -133,12 +133,10 @@ void	get_texture(t_player *player, t_ray *ray, t_render *render)
 			render->wall_face = SOUTH;
 	}
 	render->wall_hit -= floor(render->wall_hit);
-	render->tx_x = (int)(render->wall_hit * TEXTURE_SIZE);
-	if (ray->wall_face == EAST)
-		render->tx_x = TEXTURE_SIZE - render->tx_x - 1;
-	if (ray->wall_face == NORTH)
-		render->tx_x = TEXTURE_SIZE - render->tx_x - 1;
-	render->step = (1.0 * TEXTURE_SIZE / render->tx_height);
+	render->tx_x = (int)(render->wall_hit * map->tx[render->wall_face].width);
+	if (render->wall_face == WEST || render->wall_face == SOUTH)
+		render->tx_x = map->tx[render->wall_face].width - render->tx_x - 1;
+	render->step = (1.0 * map->tx[render->wall_face].height / render->tx_height);
 	render->tx_pos = (render->tx_start - WINDOW_HEIGHT / 2
 		+ render->tx_height / 2) * render->step;
 }
@@ -180,7 +178,7 @@ void	render_column(t_render *render, t_img *screen, t_map *map, int col)
 	y = render->tx_start;
 	while (y < render->tx_end)
 	{
-		render->tx_y = (int)render->tx_pos % TEXTURE_SIZE;
+		render->tx_y = (int)render->tx_pos % map->tx[render->wall_face].height;
 		render->tx_pos += render->step;
 		color = (map->tx[render->wall_face].img.px
 			+ (render->tx_y * map->tx[render->wall_face].img.line_len)

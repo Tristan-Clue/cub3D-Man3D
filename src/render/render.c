@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:58:17 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/03 14:35:06 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/05 11:07:02 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	render_pov(t_img *screen, t_player *player, t_map *map)
 		init_rays(player, &ray);	// Initiate current column ray
 		cast_rays(&ray, map);
 		get_height(&ray, &render);
-		get_texture(player, &ray, &render);
+		get_texture(player, &ray, &render, map);
 		render_column(&render, screen, map, col);
 		col++;
 	}

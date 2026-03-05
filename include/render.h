@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 17:53:22 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/02 17:47:36 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/05 11:06:48 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ typedef struct ray
 	double	ray_dist;
 	double	perp_dist;
 	int		wall;
-	int		wall_face;
 	int		hit;
 }			t_ray;
 
 void	init_rays(t_player *player, t_ray *ray);
 void	cast_rays(t_ray *ray, t_map *map);
 void	get_height(t_ray *ray, t_render *render);
-void	get_texture(t_player *player, t_ray *ray, t_render *render);
+void	get_texture(t_player *player, t_ray *ray, t_render *render, t_map *map);
 void	render_column(t_render *render, t_img *screen, t_map *map, int col);
 void	render_background(t_img *screen, t_map *map);
 
