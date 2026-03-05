@@ -32,6 +32,7 @@ SRC		= \
 			init/parse_tex.c								\
 			render/render_background.c					\
 			render/render.c		render/ray_calculation.c			\
+			debug/debug.c
 
 OBJS_DIR	= build/
 
@@ -61,6 +62,7 @@ $(OBJS_DIR):
 	mkdir	$(OBJS_DIR)/render
 	mkdir	$(OBJS_DIR)/init
 	mkdir	$(OBJS_DIR)/event
+	mkdir	$(OBJS_DIR)/debug
 
 $(LIBFT):
 	echo "Compiling libft functions..."

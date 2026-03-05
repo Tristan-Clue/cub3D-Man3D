@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 20:20:39 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/03 15:02:56 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/04 13:07:35 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	movement_w(t_player *player, t_map *map)
 	double	x;
 	double	y;
 
-	printf("here\n");
+	//printf("here\n");
 	x = player->pos.x + player->dir.x * MOVE_SPEED;
 	y = player->pos.y + player->dir.y * MOVE_SPEED;
 	if (map->layout[(int)floor(player->pos.y)][(int)floor(x)] != '1')
@@ -78,5 +78,4 @@ void	handle_movement(t_input *input, t_player *player, t_map *map)
 		movement_a(player, map);
 	if (input->movement & KEY_D)
 		movement_d(player, map);
-	printf("%f, %f\n", player->pos.x, player->pos.y);
 }
