@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 12:44:39 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/06 20:30:54 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/06 21:27:52 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	rotate_camera(t_input *input, t_player *player)
 	}
 	if (input->rot_angle)
 	{
-		rot_mx(&player->dir, input->rot_angle);
-		rot_mx(&player->plane, input->rot_angle);
+		rot_mx(&player->dir, -input->rot_angle);
+		rot_mx(&player->plane, -input->rot_angle);
 		input->rot_angle = 0;
 	}
 }
