@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 14:24:08 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/03 15:05:45 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:38:31 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ int	handle_mouse_release(int button, int x, int y, t_data *data)
 static int	handle_motion(int x, int y, t_data *data)
 {
 	(void)y;
-	data->input.rot_angle = (x - data->input.mouse_x) / MOUSE_SENSE;
-	data->input.mouse_x = x;
+//	printf("%d\n", x);
+	data->input.rot_angle = (x - WINDOW_WIDTH / 2) / MOUSE_SENSE;
 	return (SUCCESS);
 }
 

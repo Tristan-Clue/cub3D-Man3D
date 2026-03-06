@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 13:19:22 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/06 17:27:38 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/06 20:25:45 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	init_mlx(t_data *data)
 		delete_mlx(data);
 		error_exit("mlx_get_data_addr failure");
 	}
+	mlx_mouse_hide(data->mlx, data->window);
 	return (SUCCESS);
 }
 
