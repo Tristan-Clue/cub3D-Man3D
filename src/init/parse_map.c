@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 08:06:39 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/03 01:35:27 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/06 16:05:55 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	parse_map(t_map *map, const char *s)
 		error_exit("Error\ncub3d: invalid config filename");
 	fd = open(s, O_RDONLY);
 	if (fd == -1)
-		perror_exit("Error\ncub3d");
+	{
+		ft_putstr_fd("Error\ncub3d: ", STDERR_FILENO);
+		perror_exit((char *)s);
+	}
 	get_elements(fd, map);
 	close(fd);
 	parse_player_pos(map);

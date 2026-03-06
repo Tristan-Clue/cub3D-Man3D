@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 13:25:04 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/03 01:54:43 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/06 16:12:15 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 void		get_color(t_map *map, char *str, char type, int fd);
 void		skip_spaces(char **tmp);
@@ -65,8 +66,10 @@ static void	get_path(t_map *map, char *str, t_direction direction, int fd)
 	{
 		free(str);
 		close(fd);
+		ft_putstr_fd("Error\ncub3d: ", STDERR_FILENO);
+		perror(map->tx_path[direction]);
 		destroy_map(map);
-		perror_exit("Error\ncub3d");
+		exit(EXIT_FAILURE);
 	}
 	close(texfd);
 	return ;
