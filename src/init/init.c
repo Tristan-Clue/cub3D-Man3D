@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 13:19:22 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/04 17:38:19 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:27:38 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,22 @@ void	init_player_dir(t_player *player, t_map *map)
 	player->pos.y = map->starting_pos.y + 0.5;
 	if (map->starting_dir == NORTH)
 	{
-		set_vector(&player->plane, 0.66, 0);
+		set_vector(&player->plane, 0.88, 0);
 		set_vector(&player->dir, 0, -1);
 	}
 	if (map->starting_dir == EAST)
 	{
-		set_vector(&player->plane, 0, 0.66);
+		set_vector(&player->plane, 0, 0.88);
 		set_vector(&player->dir, 1, 0);
 	}
 	if (map->starting_dir == SOUTH)
 	{
-		set_vector(&player->plane, -0.66, 0);
+		set_vector(&player->plane, -0.88, 0);
 		set_vector(&player->dir, 0, 1);
 	}
 	if (map->starting_dir == WEST)
 	{
-		set_vector(&player->plane, 0, 0.66);
+		set_vector(&player->plane, 0, 0.88);
 		set_vector(&player->dir, -1, 0);
 	}
 }
