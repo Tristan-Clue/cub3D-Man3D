@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 20:20:39 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/04 13:07:35 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/06 14:24:58 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,25 @@ static void	movement_d(t_player *player, t_map *map)
 		player->pos.y = y;
 }
 
+int	diagonal_movement(int movement)
+{
+	if (movement & KEY_W && (movement & KEY_D || movement & KEY_A))
+	{
+		//printf("diagonal up\n");
+		return (1);
+	}
+	if (movement & KEY_S && (movement & KEY_D || movement & KEY_A))
+	{
+		//printf("diagonal down\n");
+		return (1);
+	}
+	return (0);
+}
+
 void	handle_movement(t_input *input, t_player *player, t_map *map)
 {
+	if (diagonal_movement(input->movement))
+		perform_diagonal(input, player, map);
 	if (input->movement & KEY_W)
 		movement_w(player, map);
 	if (input->movement & KEY_S)
