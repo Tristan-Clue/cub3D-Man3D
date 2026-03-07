@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 14:24:08 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/07 19:53:16 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/07 20:20:03 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static int	focus_out(t_data *data)
 	data->input.movement = 0;
 	data->input.rotation = 0;
 	data->flag.focus = 0;
+	data->flag.render = 0;
 //	printf("Focus out\n");
 	return (SUCCESS);
 }
@@ -97,6 +98,7 @@ static int	focus_out(t_data *data)
 static int focus_in(t_data *data)
 {
 	data->flag.focus = 1;
+	data->flag.render = 1;
 //	printf("Focus in\n");
 	return (SUCCESS);
 }

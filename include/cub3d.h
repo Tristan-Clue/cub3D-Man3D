@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/07 10:56:05 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/07 20:28:27 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include <stdint.h>
+# include <sys/time.h>
 
 # define TITLE			"MAN3D"
 # define WINDOW_WIDTH	1280
@@ -50,6 +51,9 @@
 # define PAN_ANGLE		1
 # define MOUSE_SENSE	10
 # define MOVE_SPEED		0.1
+
+typedef struct timeval	t_tv;
+typedef struct timezone	t_tz;
 
 typedef enum e_direction
 {
@@ -118,6 +122,12 @@ typedef struct s_flag
 	int		focus;
 }			t_flag;
 
+typedef struct s_framerate
+{
+	int		frames;
+	long	sec;
+}			t_framerate;
+
 typedef struct s_data
 {
 	t_map		map;
@@ -125,6 +135,9 @@ typedef struct s_data
 	t_input		input;
 	t_img		img;
 	t_flag		flag;
+	t_tv		tv;
+	t_tz		tz;
+	t_framerate	frames;
 	void		*mlx;
 	void		*window;
 }			t_data;
