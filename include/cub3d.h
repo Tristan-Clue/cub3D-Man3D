@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/05 11:09:21 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/07 10:56:05 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,19 @@ typedef struct s_map
 	t_direction	starting_dir;
 }				t_map;
 
+typedef struct s_flag
+{
+	int		render;
+	int		focus;
+}			t_flag;
+
 typedef struct s_data
 {
 	t_map		map;
 	t_player	player;
 	t_input		input;
 	t_img		img;
+	t_flag		flag;
 	void		*mlx;
 	void		*window;
 }			t_data;
