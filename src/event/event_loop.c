@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 14:01:11 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/07 20:36:14 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:34:25 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ static int	handle_idle(t_data *data)
 	}
 	if (data->flag.focus == 1 && data->flag.render == 1)
 	{
-		mlx_mouse_move(data->mlx, data->window, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+		mlx_mouse_move(data->mlx, data->window,
+			WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 		update_data(data);
 		render_pov(&data->img, &data->player, &data->map);
-		mlx_put_image_to_window(data->mlx, data->window, data->img.img_ptr, 0, 0);
+		mlx_put_image_to_window(data->mlx, data->window,
+			data->img.img_ptr, 0, 0);
 		data->flag.render = 0;
 	}
 	return (SUCCESS);

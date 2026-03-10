@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:58:44 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/04 17:38:25 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:22:29 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_map_info(t_map *map)
 
 	y = -1;
 	printf("Map Layout (Row: %d, Col: %d):\n", map->row_number,
-			map->col_number);
+		map->col_number);
 	while (++y < map->row_number)
 	{
 		x = -1;
@@ -33,7 +33,7 @@ void	print_map_info(t_map *map)
 	}
 	printf("Ceiling : %X\nFloor: %X\n", map->ceiling_color, map->floor_color);
 	printf("Player Starting pos: %f, %f\n", map->starting_pos.x,
-			map->starting_pos.y);
+		map->starting_pos.y);
 	printf("Player Starting direction: %d\n", map->starting_dir);
 }
 
@@ -44,10 +44,10 @@ void	print_tex_info(t_map *map)
 	x = 0;
 	while (x < 4)
 	{
-		printf("Tex%d ptr: %p, ", x+1, map->tx[x].img.img_ptr);
+		printf("Tex%d ptr: %p, ", x + 1, map->tx[x].img.img_ptr);
 		printf("Px: %p, bpp: %d, ", map->tx[x].img.px, map->tx[x].img.bpp);
 		printf("len: %d, endian: %d\n", map->tx[x].img.line_len,
-		 	map->tx[x].img.endian);
+			map->tx[x].img.endian);
 		x++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:58:17 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/05 11:07:02 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:46:57 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 // Once the distance is calculated, the height of the wall is determined
 // and the size of the wall will be calculated to determine how much of the
 // texture will be rendered in that column.
-
 
 void	render_pov(t_img *screen, t_player *player, t_map *map)
 {
@@ -39,7 +38,9 @@ void	render_pov(t_img *screen, t_player *player, t_map *map)
 		ray.map_y = floor(player->pos.y);
 		ray.hit = 0;
 		ray.camera_x = 2.0 * ((double)col / WINDOW_WIDTH) - 1.0;
-		init_rays(player, &ray);	// Initiate current column ray
+		ray.dir.x = player->dir.x + player->plane.x * ray.camera_x;
+		ray.dir.y = player->dir.y + player->plane.y * ray.camera_x;
+		init_rays(player, &ray);
 		cast_rays(&ray, map);
 		get_height(&ray, &render);
 		get_texture(player, &ray, &render, map);

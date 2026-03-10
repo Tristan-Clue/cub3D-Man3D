@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 20:20:39 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/06 20:16:52 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:33:28 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,16 @@ static void	movement_a(t_player *player, t_map *map)
 {
 	double	x;
 	double	y;
+
 	x = player->pos.x - player->plane.x * MOVE_SPEED;
 	y = player->pos.y - player->plane.y * MOVE_SPEED;
 	if (player->plane.x && map->layout
 		[(int)floor(player->pos.y)]
-		[(int)floor(x - (player->plane.x / fabs(player->plane.x)) * 0.2)] != '1')
+		[(int)floor(x - (player->plane.x
+					/ fabs(player->plane.x)) * 0.2)] != '1')
 		player->pos.x = x;
 	if (player->plane.y && map->layout
-		[(int)floor(y - (player->plane.y / fabs(player->plane.y))* 0.2)]
+		[(int)floor(y - (player->plane.y / fabs(player->plane.y)) * 0.2)]
 		[(int)floor(player->pos.x)] != '1')
 		player->pos.y = y;
 }
@@ -73,107 +75,17 @@ static void	movement_d(t_player *player, t_map *map)
 	y = player->pos.y + player->plane.y * MOVE_SPEED;
 	if (player->plane.x && map->layout
 		[(int)floor(player->pos.y)]
-		[(int)floor(x + (player->plane.x / fabs(player->plane.x)) * 0.2)] != '1')
+		[(int)floor(x + (player->plane.x
+					/ fabs(player->plane.x)) * 0.2)] != '1')
 		player->pos.x = x;
 	if (player->plane.y && map->layout
 		[(int)floor(y + (player->plane.y / fabs(player->plane.y)) * 0.2)]
 		[(int)floor(player->pos.x)] != '1')
 		player->pos.y = y;
 }
-// BUG: BROKEN CODE TO BE FIXED OR DUMPED SOON
-/*
-void	perform_diagonal(int movement, t_player *player, t_map *map)
-{
-	double	x;
-	double	y;
 
-	x = 0;
-	y = 0;
-	if (movement & KEY_W && (movement & KEY_D || movement & KEY_A))
-	{
-		x = player->pos.x + player->dir.x * (MOVE_SPEED / 2);
-		y = player->pos.y + player->dir.y * (MOVE_SPEED / 2 );
-		if (movement & KEY_D)
-		{
-			x += player->plane.x * (MOVE_SPEED / 2);
-			y += player->plane.y * (MOVE_SPEED / 2);
-			if (player->plane.x && map->layout
-				[(int)floor(player->pos.y)]
-				[(int)floor(x + (player->plane.x / fabs(player->plane.x)) * 0.1
-					  + (player->dir.x / fabs(player->dir.x)) * 0.1)] != '1')
-				player->pos.x = x;
-			if (player->plane.y && map->layout
-				[(int)floor(y + (player->plane.y / fabs(player->plane.y)) * 0.1
-					   + (player->dir.y / fabs(player->dir.y)) * 0.1)]
-				[(int)floor(player->pos.x)] != '1')
-				player->pos.y = y;
-		}
-		else
-		{
-			x -= player->plane.x * (MOVE_SPEED / 2);
-			y -= player->plane.y * (MOVE_SPEED / 2);
-			if (player->plane.x && map->layout
-				[(int)floor(player->pos.y)]
-				[(int)floor(x - (player->plane.x / fabs(player->plane.x)) * 0.1
-					  + (player->dir.x / fabs(player->dir.x)) * 0.1)] != '1')
-				player->pos.x = x;
-			if (player->plane.y && map->layout
-				[(int)floor(y - (player->plane.y / fabs(player->plane.y)) * 0.1
-					   + (player->dir.y / fabs(player->dir.y)) * 0.1)]
-				[(int)floor(player->pos.x)] != '1')
-				player->pos.y = y;
-		}
-	}
-	if (movement & KEY_S && (movement & KEY_D || movement & KEY_A))
-	{
-		x = player->pos.x - player->dir.x * (MOVE_SPEED / 2);
-		y = player->pos.y - player->dir.y * (MOVE_SPEED / 2 );
-		if (movement & KEY_D)
-		{
-			x += player->plane.x * (MOVE_SPEED / 2);
-			y += player->plane.y * (MOVE_SPEED / 2);
-			if (player->plane.x && map->layout
-				[(int)floor(player->pos.y)]
-				[(int)floor(x + (player->plane.x / fabs(player->plane.x)) * 0.1
-					  - (player->dir.x / fabs(player->dir.x)) * 0.1)] != '1')
-				player->pos.x = x;
-			if (player->plane.y && map->layout
-				[(int)floor(y + (player->plane.y / fabs(player->plane.y)) * 0.1
-					   - (player->dir.y / fabs(player->dir.y)) * 0.1)]
-				[(int)floor(player->pos.x)] != '1')
-				player->pos.y = y;
-		}
-		else
-		{
-			x -= player->plane.x * (MOVE_SPEED / 2);
-			y -= player->plane.y * (MOVE_SPEED / 2);
-			if (player->plane.x && map->layout
-				[(int)floor(player->pos.y)]
-				[(int)floor(x - (player->plane.x / fabs(player->plane.x)) * 0.1
-					  - (player->dir.x / fabs(player->dir.x)) * 0.1)] != '1')
-				player->pos.x = x;
-			if (player->plane.y && map->layout
-				[(int)floor(y - (player->plane.y / fabs(player->plane.y)) * 0.2
-					   - (player->dir.y / fabs(player->dir.y)) * 0.1)]
-				[(int)floor(player->pos.x)] != '1')
-				player->pos.y = y;
-		}
-	}
-}
-
-int	diagonal_movement(int movement)
-{
-	if (movement & KEY_W && (movement & KEY_D || movement & KEY_A))
-		return (1);
-	if (movement & KEY_S && (movement & KEY_D || movement & KEY_A))
-		return (1);
-	return (0);
-}
-*/
 void	handle_movement(t_input *input, t_player *player, t_map *map)
 {
-//	if (diagonal_movement(input->movement))
-//		perform_diagonal(input->movement, player, map);
 	if (input->movement & KEY_W)
 		movement_w(player, map);
 	if (input->movement & KEY_S)
