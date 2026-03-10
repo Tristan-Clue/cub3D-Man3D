@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/07 20:28:27 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/10 21:26:44 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define PAN_ANGLE		1
 # define MOUSE_SENSE	10
 # define MOVE_SPEED		0.1
+
+# define LANTURN_PATH	"textures/lanturn.xpm"
 
 typedef struct timeval	t_tv;
 typedef struct timezone	t_tz;
@@ -128,6 +130,17 @@ typedef struct s_framerate
 	long	sec;
 }			t_framerate;
 
+typedef struct s_anim
+{
+	t_img	img;
+	int		frames;
+	int		width;
+	int		height;
+	int		sprite_width;
+	int		sprite_height;
+	int		col;
+}			t_anim;
+
 typedef struct s_data
 {
 	t_map		map;
@@ -138,6 +151,7 @@ typedef struct s_data
 	t_tv		tv;
 	t_tz		tz;
 	t_framerate	frames;
+	t_anim		obj;
 	void		*mlx;
 	void		*window;
 }			t_data;
@@ -157,6 +171,7 @@ void	parse_map(t_map *map, const char *s);
 int		init_mlx(t_data *data);
 void	init_player_dir(t_player *player, t_map *map);
 int		assign_tx_path(void *mlx, t_map *map);
+int		init_lanturn(void *mlx, t_anim *obj);
 
 /*			render			*/
 void	render_pov(t_img *screen, t_player *player, t_map *map);
@@ -176,5 +191,9 @@ void	handle_movement(t_input *input, t_player *player, t_map *map);
 void	print_map_info(t_map *map);
 void	print_tex_info(t_map *map);
 void	print_player_info(t_player *player);
+void	print_lanturn_info(t_anim *obj);
+
+/*			animation		*/
+void	render_anim(t_data *data, int start_x, int start_y);
 
 #endif

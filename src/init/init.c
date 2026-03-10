@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 13:19:22 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/07 14:57:44 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/10 21:01:04 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,26 @@ int	init_mlx(t_data *data)
 		error_exit("mlx_get_data_addr failure");
 	}
 	mlx_mouse_hide(data->mlx, data->window);
+	return (SUCCESS);
+}
+
+int	init_lanturn(void *mlx, t_anim *obj)
+{
+	obj->img.img_ptr = mlx_xpm_file_to_image(mlx, LANTURN_PATH,
+			&obj->width, &obj->height);
+	if (!obj->img.img_ptr)
+		return (FAILURE);
+	obj->img.px = mlx_get_data_addr(obj->img.img_ptr, &obj->img.bpp,
+			&obj->img.line_len, &obj->img.endian);
+	if (!obj->img.px)
+	{
+		mlx_destroy_image(mlx, obj->img.img_ptr);
+		return (FAILURE);
+	}
+	obj->frames = 21;// ENTER FRAMES HERE
+	obj->sprite_width = 30; // ENTER WIDTH OF EACH FRAME IN PX
+	obj->sprite_height = 45; // HEIGHT OF EACH FRAME IN PX
+	obj->col = 7; // NUMBER OF FRAMES PER ROW
 	return (SUCCESS);
 }
 

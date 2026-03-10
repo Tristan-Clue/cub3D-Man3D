@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:58:44 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/10 12:22:29 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/10 21:24:35 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,12 @@ void	print_player_info(t_player *player)
 	printf("Player pos: %lf, %lf\n", player->pos.x, player->pos.y);
 	printf("Player dir: %lf, %lf\n", player->dir.x, player->dir.y);
 	printf("Player plane: %lf, %lf\n", player->plane.x, player->plane.y);
+}
+
+void	print_lanturn_info(t_anim *obj)
+{
+	printf("Texture ptr: %p, ", obj->img.img_ptr);
+	printf("Px: %p, bpp: %d, ", obj->img.px, obj->img.bpp);
+	printf("len: %d, endian: %d\n", obj->img.line_len,
+		obj->img.endian);
 }
