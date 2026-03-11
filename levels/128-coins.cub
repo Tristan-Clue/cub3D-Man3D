@@ -1,6 +1,6 @@
 NO textures/wall_mid.xpm
 SO textures/wall_shadow.xpm
-WE textures/wall_shadow.xpm
+WE textures/wall_dark.xpm
 EA textures/wall_dark.xpm
 
 F 20,40,60
