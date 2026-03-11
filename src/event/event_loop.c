@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 14:01:11 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/11 10:35:19 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/11 18:29:21 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	handle_idle(t_data *data)
 			WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 		update_data(data);
 		render_pov(&data->img, &data->player, &data->map);
-		render_anim(data, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+		render_anim(&data->obj, &data->img, WINDOW_WIDTH * 4 / 7, WINDOW_HEIGHT / 2);
 		mlx_put_image_to_window(data->mlx, data->window,
 			data->img.img_ptr, 0, 0);
 		data->flag.render = 0;

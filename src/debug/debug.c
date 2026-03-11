@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:58:44 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/11 16:06:33 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/11 17:24:05 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void	print_lanturn_info(t_anim *obj)
 	printf("len: %d, endian: %d\n", obj->img.line_len,
 		obj->img.endian);
 	printf("Lantern Width Height: %d, %d\n", obj->width, obj->height);
-	printf("Sprite Width Height: %d, %d\n", obj->sprite_width, obj->sprite_height);
+	printf("Sprite Width Height: %d, %d\n", obj->sprite_width,
+		obj->sprite_height);
 }

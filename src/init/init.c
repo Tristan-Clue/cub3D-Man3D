@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 13:19:22 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/11 15:27:45 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/11 18:46:20 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ int	init_lanturn(void *mlx, t_anim *obj)
 		mlx_destroy_image(mlx, obj->img.img_ptr);
 		return (FAILURE);
 	}
-	obj->frames = 21;// ENTER FRAMES HERE
-	obj->sprite_width = 30; // ENTER WIDTH OF EACH FRAME IN PX
-	obj->sprite_height = 45; // HEIGHT OF EACH FRAME IN PX
-	obj->col = 7; // NUMBER OF FRAMES PER ROW
+	obj->frames = 21;
+	obj->sprite_width = 30;
+	obj->sprite_height = 45;
+	obj->col = 7;
+	obj->fps = 10;
+	obj->scale = 5;
+	obj->step = 1.0 / obj->scale;
 	return (SUCCESS);
 }
 

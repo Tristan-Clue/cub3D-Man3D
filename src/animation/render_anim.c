@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:53:58 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/11 16:28:01 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/11 18:46:40 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include <stdio.h>
 
+/*
 void	assign_upscale(t_data *data, int start_x, int start_y, int scale, char *color)
 {
 	int		x;
@@ -34,27 +35,36 @@ void	assign_upscale(t_data *data, int start_x, int start_y, int scale, char *col
 		y++;
 	}
 }
-
-void	render_anim(t_data *data, int start_x, int start_y)
+*/
+void	render_anim(t_anim *obj, t_img *screen, int start_x, int start_y)
 {
 	char	*color;
+	char	*px;
 	int		y;
 	int		x;
-	int		frame;
 
 	y = 0;
-	frame = data->frames.frames % data->obj.frames;
-	while (start_y + y < WINDOW_HEIGHT && y < data->obj.sprite_height)
+	obj->curr_frame = (obj->curr_frame + 1) % obj->frames;
+	obj->pos.y = (obj->curr_frame / obj->col) * obj->sprite_height;
+	while (start_y + y < WINDOW_HEIGHT && y < obj->sprite_height * obj->scale)
 	{
 		x = 0;
-		while (start_x + x < WINDOW_WIDTH && x < data->obj.sprite_width)
+		obj->pos.x = (obj->curr_frame % obj->col) * obj->sprite_width;
+		obj->tex_y = (int)obj->pos.y % obj->height;
+		obj->pos.y += obj->step;
+		while (start_x + x < WINDOW_WIDTH && x < obj->sprite_width * obj->scale)
 		{
-			color = data->obj.img.px + (((frame / data->obj.col)
-						* data->obj.sprite_height + y) * data->obj.img.line_len)
-				+ ((frame % data->obj.col)
-				* data->obj.sprite_width + x) * (data->obj.img.bpp / 8);
+			obj->tex_x = (int)obj->pos.x % obj->width;
+			obj->pos.x += obj->step;
+			color = obj->img.px
+				+ (obj->tex_y) * obj->img.line_len
+				+ (obj->tex_x) * (obj->img.bpp / 8);
 			if (*(int *)color >= 0)
-				assign_upscale(data, start_x + (x * 10), start_y + (y * 10), 10, color);
+			{
+				px = screen->px + (start_y + y) * screen->line_len
+					+ (start_x + x) * (screen->bpp / 8);
+				*(unsigned int *)px = *(unsigned int *)color;
+			}
 			x++;
 		}
 		y++;
