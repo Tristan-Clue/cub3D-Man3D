@@ -18,7 +18,7 @@ LIBFT_LIB	= libft/include
 LIBMLX_LIB	= mlx_linux
 
 OBJS_DIR	= build/
-SRCS_DIR		= src/
+SRCS_DIR	= src/
 
 SRC		= \
 			main.c		error.c		cleanup.c					\

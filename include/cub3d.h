@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/10 21:26:44 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/11 17:06:06 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 # define MOUSE_SENSE	10
 # define MOVE_SPEED		0.1
 
-# define LANTURN_PATH	"textures/lanturn.xpm"
+# define LANTURN_PATH	"textures/lantern.xpm"
 
 typedef struct timeval	t_tv;
 typedef struct timezone	t_tz;
@@ -139,6 +139,9 @@ typedef struct s_anim
 	int		sprite_width;
 	int		sprite_height;
 	int		col;
+	int		scale;
+	int		tex_x;
+	int		tex_y;
 }			t_anim;
 
 typedef struct s_data
