@@ -1,4 +1,4 @@
-NAME		= Man3D
+NAME		= cub3D
 
 CC			= cc
 CFLAGS		= -Wextra -Werror -Wall -g3 -O3
