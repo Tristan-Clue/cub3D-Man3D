@@ -1,10 +1,10 @@
-NO             textures/north.xpm
-SO textures/barrel.xpm
-WE textures/west.xpm
-EA textures/pillar.xpm
+NO textures/wall_mid.xpm
+SO textures/wall_shadow.xpm
+WE textures/wall_shadow.xpm
+EA textures/wall_mid.xpm
 
-F 194,178,128
-C 245,248,230
+F 20,40,60
+C 58,100,150
 
         111111111111        11111111111111
        1100000000011        110000000000011

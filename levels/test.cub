@@ -1,10 +1,10 @@
-NO textures/wall_bright.xpm
+NO textures/wall_mid.xpm
 SO textures/wall_shadow.xpm
-WE textures/wall_mid.xpm
+WE textures/wall_shadow.xpm
 EA textures/wall_mid.xpm
 
-F 194,178,128
-C 128,128,128
+F 20,40,60
+C 58,100,150
 
       1111111111111111111111111111111111111111111111111111
       1000000000000000000000000000000000000000000000000001

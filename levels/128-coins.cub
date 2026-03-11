@@ -1,9 +1,10 @@
-F 39,58,64
-C 26,28,32
-NO ./textures/BrickWall.xpm
-SO ./textures/BrickWall.xpm
-WE ./textures/BrickWall.xpm
-EA ./textures/BrickWall.xpm
+NO textures/wall_mid.xpm
+SO textures/wall_shadow.xpm
+WE textures/wall_shadow.xpm
+EA textures/wall_mid.xpm
+
+F 20,40,60
+C 58,100,150
 
 111111111111111111111
 100000000010000000001
