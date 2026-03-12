@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 15:11:10 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/03 15:16:36 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/12 17:40:47 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <mlx.h>
 
-static void	delete_tx_img(void *mlx, t_map *map)
+static void	delete_tx_img(void *mlx, t_map *map, t_anim *anim)
 {
 	if (map->tx[0].img.img_ptr)
 		mlx_destroy_image(mlx, map->tx[0].img.img_ptr);
@@ -24,11 +24,13 @@ static void	delete_tx_img(void *mlx, t_map *map)
 		mlx_destroy_image(mlx, map->tx[2].img.img_ptr);
 	if (map->tx[3].img.img_ptr)
 		mlx_destroy_image(mlx, map->tx[3].img.img_ptr);
+	if (anim->img.img_ptr)
+		mlx_destroy_image(mlx, anim->img.img_ptr);
 }
 
 void	delete_mlx(t_data *data)
 {
-	delete_tx_img(data->mlx, &data->map);
+	delete_tx_img(data->mlx, &data->map, &data->anim);
 	if (data->img.img_ptr)
 		mlx_destroy_image(data->mlx, data->img.img_ptr);
 	if (data->window)
