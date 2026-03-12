@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 13:19:22 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/11 18:46:20 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/12 16:16:45 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	init_lanturn(void *mlx, t_anim *obj)
 	obj->sprite_width = 30;
 	obj->sprite_height = 45;
 	obj->col = 7;
-	obj->fps = 10;
-	obj->scale = 5;
+	obj->fps = 8;
+	obj->scale = 8;
 	obj->step = 1.0 / obj->scale;
 	return (SUCCESS);
 }

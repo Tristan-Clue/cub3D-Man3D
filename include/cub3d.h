@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/11 18:25:58 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/12 15:42:18 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,20 +132,20 @@ typedef struct s_framerate
 
 typedef struct s_anim
 {
-	t_img	img;
-	int		frames;
-	int		width;
-	int		height;
-	int		sprite_width;
-	int		sprite_height;
-	int		col;
-	int		fps;
-	int		curr_frame;
-	int		scale;
-	int		tex_x;
-	int		tex_y;
-	t_vec	pos;
-	double	step;
+	t_img		img;
+	int			frames;
+	int			width;
+	int			height;
+	int			sprite_width;
+	int			sprite_height;
+	int			col;
+	int			fps;
+	t_framerate	curr;
+	int			scale;
+	int			tex_x;
+	int			tex_y;
+	t_vec		pos;
+	double		step;
 }			t_anim;
 
 typedef struct s_data
@@ -158,7 +158,7 @@ typedef struct s_data
 	t_tv		tv;
 	t_tz		tz;
 	t_framerate	frames;
-	t_anim		obj;
+	t_anim		anim;
 	void		*mlx;
 	void		*window;
 }			t_data;
