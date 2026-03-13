@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:10:25 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/03 01:59:29 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/13 17:32:10 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	parse_layout(t_map *map, char *line, int fd)
 	int	row;
 
 	row = 0;
+	while (line && !ft_strcmp(line, "\n"))
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 	while (line)
 	{
 		if (contain_illegal_ch(line) || row >= MAX_MAP_SIZE)
@@ -45,9 +50,12 @@ void	parse_layout(t_map *map, char *line, int fd)
 
 static int	contain_illegal_ch(char *s)
 {
-	int	i;
+	static int	map_has_ended = false;
+	int			i;
 
 	if (s[0] == '\n')
+		map_has_ended = true;
+	else if (s[0] && map_has_ended)
 		return (true);
 	i = 0;
 	while (s[i] && s[i] != '\n')
