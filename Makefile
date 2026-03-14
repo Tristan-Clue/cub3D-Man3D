@@ -49,7 +49,7 @@ CYAN	= \e[36m
 WHITE	= \e[0m
 
 .PHONY: all fclean clean re
-#.SILENT:
+.SILENT:
 
 all : $(OBJS_DIR) $(NAME)
 
