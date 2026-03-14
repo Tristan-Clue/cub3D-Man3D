@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 20:20:39 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/14 14:18:53 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/14 18:44:34 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,93 +14,74 @@
 #include <math.h>
 #include <stdio.h>
 
-double	get_sign(double i)
-{
-	if (i > 0)
-		return (1);
-	if (i < 0)
-		return (-1);
-	return (0);
-}
-
 int	collide_y(double x, t_player *player, t_map *map)
 {
-		if (map->layout[(int)floor(player->pos.y + get_sign(player->dir.y) * 0.2)]
-			[(int)floor(x)] == '1'
-			|| map->layout[(int)floor(player->pos.y - get_sign(player->dir.y) * 0.2)]
-			[(int)floor(x)] == '1')
-			return (0);
-		if (map->layout[(int)floor(player->pos.y - get_sign(player->plane.y) * 0.2)]
-			[(int)floor(x)] == '1'
-			|| map->layout[(int)floor(player->pos.y + get_sign(player->plane.y * 0.2))]
-			[(int)floor(x)] == '1')
-			return (0);
+	if (map->layout[(int)floor(player->pos.y + 0.2)]
+		[(int)floor(x)] == '1'
+		|| map->layout[(int)floor(player->pos.y - 0.2)]
+		[(int)floor(x)] == '1')
+		return (0);
+	if (map->layout[(int)floor(player->pos.y - 0.2)]
+		[(int)floor(x)] == '1'
+		|| map->layout[(int)floor(player->pos.y + 0.2)]
+		[(int)floor(x)] == '1')
+		return (0);
 	return (1);
 }
 
 int	collide_x(double y, t_player *player, t_map *map)
 {
-		if (map->layout[(int)floor(y)]
-			[(int)floor(player->pos.x + get_sign(player->dir.x) * 0.2)] == '1'
-			|| map->layout[(int)floor(y)]
-			[(int)floor(player->pos.x - get_sign(player->dir.x) * 0.2)] == '1')
-			return (0);
-		if(map->layout[(int)floor(y)]
-			[(int)floor(player->pos.x - get_sign(player->plane.x) * 0.2)] == '1'
-			|| map->layout[(int)floor(y)]
-			[(int)floor(player->pos.x + get_sign(player->plane.x) * 0.2)] == '1')
-			return (0);
+	if (map->layout[(int)floor(y)]
+		[(int)floor(player->pos.x + 0.2)] == '1'
+		|| map->layout[(int)floor(y)]
+		[(int)floor(player->pos.x - 0.2)] == '1')
+		return (0);
+	if(map->layout[(int)floor(y)]
+		[(int)floor(player->pos.x - 0.2)] == '1'
+		|| map->layout[(int)floor(y)]
+		[(int)floor(player->pos.x + 0.2)] == '1')
+		return (0);
 	return (1);
 }
 
 int	check_x(double x, t_player *player, t_map *map)
 {
-	double	movement_dir;
-	double	movement_plane;
-
-	movement_dir = get_sign(player->dir.x) * 0.2;
-	movement_plane = get_sign(player->plane.x) * 0.2;
 	if (map->layout[(int)floor(player->pos.y)]
-		[(int)floor(x + movement_dir)] == '1'
-		|| !collide_y(x + movement_dir, player, map))
+		[(int)floor(x + 0.2)] == '1'
+		|| !collide_y(x + 0.2, player, map))
 		return (0);
 	if (map->layout[(int)floor(player->pos.y)]
-		[(int)floor(x - movement_dir)] == '1'
-		|| !collide_y(x - movement_dir, player, map))
+		[(int)floor(x - 0.2)] == '1'
+		|| !collide_y(x - 0.2, player, map))
 		return (0);
 	if (map->layout[(int)floor(player->pos.y)]
-		[(int)floor(x - movement_plane)] == '1'
-		|| !collide_y(x - movement_plane, player, map))
+		[(int)floor(x - 0.2)] == '1'
+		|| !collide_y(x - 0.2, player, map))
 		return (0);
 	if (map->layout[(int)floor(player->pos.y)]
-		[(int)floor(x + movement_plane)] == '1'
-		|| !collide_y(x + movement_plane, player, map))
+		[(int)floor(x + 0.2)] == '1'
+		|| !collide_y(x + 0.2, player, map))
 		return (0);
 	return (1);
 }
 
 int	check_y(double y, t_player *player, t_map *map)
 {
-	double	movement_dir;
-	double	movement_plane;
-
-	movement_dir = get_sign(player->dir.y) * 0.2;
-	movement_plane = get_sign(player->plane.y) * 0.2;
-	if (map->layout[(int)floor(y + movement_dir)]
+	if (map->layout[(int)floor(y + 0.2)]
 		[(int)floor(player->pos.x)] == '1' 
-		|| !collide_x(y + movement_dir, player, map))
+		|| !collide_x(y + 0.2, player, map))
 		return (0);
-	if (map->layout [(int)floor(y - movement_dir)]
+	if (map->layout [(int)floor(y - 0.2)]
 		[(int)floor(player->pos.x)] == '1'
-		|| !collide_x(y - movement_dir, player, map))
+		|| !collide_x(y - 0.2, player, map))
 		return (0);
-	if (map->layout[(int)floor(y - movement_plane)]
+	if (map->layout[(int)floor(y - 0.2)]
 		[(int)floor(player->pos.x)] == '1'
-		|| !collide_x(y - movement_plane, player, map))
+		|| !collide_x(y - 0.2, player, map))
 		return (0);
-	if (map->layout[(int)floor(y + movement_plane)]
+	if (map->layout[(int)floor(y + 0.2)]
 		[(int)floor(player->pos.x)] == '1'
-		|| !collide_x(y + movement_plane, player, map))
+		|| !collide_x(y + 0.2, player, map))
 		return (0);
 	return (1);
 }
