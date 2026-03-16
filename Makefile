@@ -26,6 +26,7 @@ SRC		= \
 			event/detect_input.c	event/event_camera.c		\
 			event/event_loop.c		event/movement.c			\
 			event/update_data.c		event/detect_input_utils.c	\
+			event/collision.c									\
 			init/flood_fill.c		init/parse_layout.c			\
 			init/parse_player_pos.c	init/parse_tex_utility.c	\
 			init/init.c				init/parse_map.c			\
