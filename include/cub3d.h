@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/12 15:42:18 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:05:52 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define KEY_S			0b1000000
 # define KEY_D			0b10000000
 
-# define PAN_ANGLE		1
+# define PAN_ANGLE		2
 # define MOUSE_SENSE	10
 # define MOVE_SPEED		0.1
 
