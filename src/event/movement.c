@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 20:20:39 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/16 14:26:50 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:45:11 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,11 @@ void	handle_movement(t_input *input, t_player *player, t_map *map)
 		get_avg_movement(input, &movement);
 		new.x = player->pos.x + movement.x;
 		new.y = player->pos.y + movement.y;
-		printf("%f, %f\n", new.x, new.y);
 		if ((new.x >= 0 && new.x < MAX_MAP_SIZE)
 			&& check_x(new.x, player, map))
 			player->pos.x = new.x;
 		if ((new.y >= 0 && new.x < MAX_MAP_SIZE)
-	  		&& check_y(new.y, player, map))
+			&& check_y(new.y, player, map))
 			player->pos.y = new.y;
 	}
 }

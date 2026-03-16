@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:42:46 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/16 14:32:28 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:45:36 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_x(double x, t_player *player, t_map *map)
 		[(int)floor(x - 0.2)] == '1'
 		|| !collide_y(x - 0.2, player, map))
 		return (0);
-	if (x - 0.2 < 0 ||map->layout[(int)floor(player->pos.y)]
+	if (x - 0.2 < 0 || map->layout[(int)floor(player->pos.y)]
 		[(int)floor(x - 0.2)] == '1'
 		|| !collide_y(x - 0.2, player, map))
 		return (0);

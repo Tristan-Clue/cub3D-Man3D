@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/16 14:34:47 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:44:40 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 
 # define PAN_ANGLE		2
 # define MOUSE_SENSE	10
-# define MOVE_SPEED		5.7
+# define MOVE_SPEED		0.1
 
 # define LANTURN_PATH	"textures/lantern.xpm"
 
