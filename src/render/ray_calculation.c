@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 09:34:56 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/10 12:41:27 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:17:59 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ void	cast_rays(t_ray *ray, t_map *map)
 			ray->map_y += ray->step.y;
 			ray->wall = NS;
 		}
-		if (map->layout[ray->map_y][ray->map_x] == '1')
+		if (ray->map_x < 0 || ray->map_x >= MAX_MAP_SIZE
+			|| ray->map_y < 0 || ray->map_y >= MAX_MAP_SIZE
+			|| map->layout[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
 	}
 	if (ray->wall == EW)

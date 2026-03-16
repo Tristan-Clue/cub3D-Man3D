@@ -6,7 +6,7 @@
 /*   By: mjoon-yu <mjoon-yu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 20:20:39 by mjoon-yu          #+#    #+#             */
-/*   Updated: 2026/03/16 13:43:40 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:26:50 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,16 @@ t_vec	combine_movement(t_input *input, t_player *player)
 	return (movement);
 }
 
-t_vec	get_avg_movement(t_input *input, t_vec movement)
+void	get_avg_movement(t_input *input, t_vec *movement)
 {
 	if (input->movement == (KEY_W | KEY_A)
 		|| input->movement == (KEY_W | KEY_D)
 		|| input->movement == (KEY_S | KEY_A)
 		|| input->movement == (KEY_S | KEY_D))
 	{
-		movement.x /= 2;
-		movement.y /= 2;
+		movement->x /= 2;
+		movement->y /= 2;
 	}
-	return (movement);
 }
 
 // TODO: Start from the base of walking side ways and hitting a corner
@@ -67,16 +66,21 @@ void	handle_movement(t_input *input, t_player *player, t_map *map)
 	t_vec	movement;
 	t_vec	new;
 
+	movement = (t_vec){0};
+	new = (t_vec){0};
 	if (input->movement & KEY_W || input->movement & KEY_A
 		|| input->movement & KEY_S || input->movement & KEY_D)
 	{
 		movement = combine_movement(input, player);
-		movement = get_avg_movement(input, movement);
+		get_avg_movement(input, &movement);
 		new.x = player->pos.x + movement.x;
 		new.y = player->pos.y + movement.y;
-		if (check_x(new.x, player, map))
+		printf("%f, %f\n", new.x, new.y);
+		if ((new.x >= 0 && new.x < MAX_MAP_SIZE)
+			&& check_x(new.x, player, map))
 			player->pos.x = new.x;
-		if (check_y(new.y, player, map))
+		if ((new.y >= 0 && new.x < MAX_MAP_SIZE)
+	  		&& check_y(new.y, player, map))
 			player->pos.y = new.y;
 	}
 }
