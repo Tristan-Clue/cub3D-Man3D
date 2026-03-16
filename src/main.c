@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/12 15:04:31 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:50:34 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 #include <stdio.h>
 #include "libft.h"
 #include "cub3d.h"
+
+static	void	print_debug(t_data *data)
+{
+	print_map_info(&data->map);
+	print_tex_info(&data->map);
+	print_lanturn_info(&data->anim);
+	print_player_info(&data->player);
+}
 
 int	main(int argc, char **argv)
 {
@@ -37,10 +45,8 @@ int	main(int argc, char **argv)
 	}
 	init_player_dir(&data.player, &data.map);
 	init_lanturn(data.mlx, &data.anim);
-	print_map_info(&data.map);
-	print_tex_info(&data.map);
-	print_lanturn_info(&data.anim);
-	print_player_info(&data.player);
+	if (DEBUG_MODE)
+		print_debug(&data);
 	event_loop(&data);
 	return (delete_mlx(&data), EXIT_SUCCESS);
 }

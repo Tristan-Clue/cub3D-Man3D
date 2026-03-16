@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:51:26 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/16 14:44:40 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:51:06 by mjoon-yu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # define TITLE			"MAN3D"
 # define WINDOW_WIDTH	1280
 # define WINDOW_HEIGHT	720
-# define RESO_WIDTH		640
-# define RESO_HEIGHT	360
 
 # define MAX_MAP_SIZE	100
 
@@ -53,6 +51,8 @@
 # define MOVE_SPEED		0.1
 
 # define LANTURN_PATH	"textures/lantern.xpm"
+
+# define DEBUG_MODE		0
 
 typedef struct timeval	t_tv;
 typedef struct timezone	t_tz;
