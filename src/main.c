@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 11:56:09 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/16 14:50:34 by mjoon-yu         ###   ########.fr       */
+/*   Updated: 2026/03/17 19:00:14 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ int	main(int argc, char **argv)
 	(void)argv;
 	(void)argc;
 	if (argc != 2)
-		error_exit("Wrong arguments\n<format = ./fdf [FILE]>");
+		error_exit("Error\n<format = ./cub3D [FILE]>");
 	data = (t_data){0};
 	parse_map(&data.map, argv[1]);
 	if (init_mlx(&data) == FAILURE)
-		error_exit("mlx/window/image creation failure");
+		error_exit("Error\nmlx/window/image creation failure");
 	if (assign_tx_path(data.mlx, &data.map) == FAILURE)
 	{
 		delete_mlx(&data);
-		error_exit("Textures not loaded");
+		error_exit("Error\nTextures not loaded");
 	}
 	init_player_dir(&data.player, &data.map);
 	init_lanturn(data.mlx, &data.anim);

@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:10:25 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/13 17:32:10 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/17 18:58:50 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ static void	copy_line(t_map *map, char *line, int row);
 
 void	parse_layout(t_map *map, char *line, int fd)
 {
-	int	row;
-
-	row = 0;
 	while (line && !ft_strcmp(line, "\n"))
 	{
 		free(line);
@@ -31,7 +28,7 @@ void	parse_layout(t_map *map, char *line, int fd)
 	}
 	while (line)
 	{
-		if (contain_illegal_ch(line) || row >= MAX_MAP_SIZE)
+		if (contain_illegal_ch(line) || map->row_number >= MAX_MAP_SIZE)
 		{
 			free(line);
 			close(fd);
@@ -40,11 +37,8 @@ void	parse_layout(t_map *map, char *line, int fd)
 		}
 		copy_line(map, line, row);
 		free(line);
-		row++;
 		line = get_next_line(fd);
 	}
-	if (row > map->row_number)
-		map->row_number = row;
 	return ;
 }
 
@@ -82,5 +76,7 @@ static void	copy_line(t_map *map, char *line, int row)
 	}
 	if (i > map->col_number)
 		map->col_number = i;
+	if (line[0] != '\n')
+		map->row_number++;
 	return ;
 }
