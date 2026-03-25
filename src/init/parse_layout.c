@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:10:25 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/17 18:58:50 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/25 15:33:53 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int	contain_illegal_ch(char *s);
+static int	contain_illegal_ch(char *s, int *map_has_ended);
 static void	copy_line(t_map *map, char *line, int row);
 
 void	parse_layout(t_map *map, char *line, int fd)
 {
+	int	map_has_ended;
+
+	map_has_ended = false;
 	while (line && !ft_strcmp(line, "\n"))
 	{
 		free(line);
@@ -28,7 +31,7 @@ void	parse_layout(t_map *map, char *line, int fd)
 	}
 	while (line)
 	{
-		if (contain_illegal_ch(line) || map->row_number >= MAX_MAP_SIZE)
+		if (contain_illegal_ch(line, &map_has_ended) || map->row_number >= MAX_MAP_SIZE)
 		{
 			free(line);
 			close(fd);
@@ -42,14 +45,13 @@ void	parse_layout(t_map *map, char *line, int fd)
 	return ;
 }
 
-static int	contain_illegal_ch(char *s)
+static int	contain_illegal_ch(char *s, int *map_has_ended)
 {
-	static int	map_has_ended = false;
-	int			i;
+	int	i;
 
 	if (s[0] == '\n')
-		map_has_ended = true;
-	else if (s[0] && map_has_ended)
+		*map_has_ended = true;
+	else if (s[0] && *map_has_ended)
 		return (true);
 	i = 0;
 	while (s[i] && s[i] != '\n')
