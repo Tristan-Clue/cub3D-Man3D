@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:10:25 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/25 15:33:53 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/25 15:38:24 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <unistd.h>
 
 static int	contain_illegal_ch(char *s, int *map_has_ended);
-static void	copy_line(t_map *map, char *line, int row);
+static void	copy_line(t_map *map, char *line);
 
 void	parse_layout(t_map *map, char *line, int fd)
 {
@@ -38,7 +38,7 @@ void	parse_layout(t_map *map, char *line, int fd)
 			destroy_map(map);
 			error_exit("Error\ncub3d: Invalid map");
 		}
-		copy_line(map, line, row);
+		copy_line(map, line);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -66,7 +66,7 @@ static int	contain_illegal_ch(char *s, int *map_has_ended)
 	return (false);
 }
 
-static void	copy_line(t_map *map, char *line, int row)
+static void	copy_line(t_map *map, char *line)
 {
 	int	i;
 
