@@ -6,7 +6,7 @@
 /*   By: kchiang <kchiang@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:10:25 by kchiang           #+#    #+#             */
-/*   Updated: 2026/03/25 15:38:24 by kchiang          ###   ########.fr       */
+/*   Updated: 2026/03/25 15:40:33 by kchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	copy_line(t_map *map, char *line)
 	i = 0;
 	while (line[i] && line[i] != '\n' && i < MAX_MAP_SIZE)
 	{
-		map->layout[row][i] = line[i];
+		map->layout[map->row_number][i] = line[i];
 		i++;
 	}
 	if (i > map->col_number)
